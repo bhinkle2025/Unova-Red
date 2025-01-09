@@ -1394,13 +1394,7 @@ DisplayListMenuID::
 	ld [wTopMenuItemY],a
 	ld a,5
 	ld [wTopMenuItemX],a
-	ld a, [wFlags_0xcd60]
-	ld b, a
-	ld a, A_BUTTON | B_BUTTON | SELECT
-	bit 2, b
-	jr z, .noSortingOption
-	or a, START
-.noSortingOption
+	ld a,A_BUTTON | B_BUTTON | SELECT | START
 	ld [wMenuWatchedKeys],a
 	ld c,10
 	call DelayFrames
