@@ -254,6 +254,7 @@ NothingToSort::
 
 ItemSortList::
 	; Used Key Items
+	db CLEANSE_TAG
 	db BICYCLE
 	db ITEMFINDER
 	db EXP_ALL

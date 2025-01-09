@@ -2869,6 +2869,18 @@ _ThrewRockText::
 	line "ROCK."
 	done
 
+_CleanseTagTurnOn::
+	text "<PLAYER> turned"
+	line "on Cleanse Tag."
+	cont "All wild battles"
+	cont "will be avoided."
+	prompt
+
+_CleanseTagTurnOff::
+	text "<PLAYER> turned"
+	line "off Cleanse Tag."
+	prompt
+
 _PlayedFluteNoEffectText::
 	text "Played the #"
 	line "FLUTE."
@@ -3208,12 +3220,12 @@ _UsedCutText::
 	prompt
 
 _ExpShareTurnOn::
-	text "[PLAYER] turned"
+	text "<PLAYER> turned"
 	line "on Exp. Share."
 	prompt
 
 _ExpShareTurnOff::
-	text "[PLAYER] turned"
+	text "<PLAYER> turned"
 	line "off Exp. Share."
 	prompt
 

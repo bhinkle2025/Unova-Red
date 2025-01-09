@@ -48,6 +48,11 @@ OakSpeech:
 	ld a,1
 	ld [wItemQuantity],a
 	call AddItemToInventory  ; give one potion
+	ld a,CLEANSE_TAG
+	ld [wcf91],a
+	ld a,3
+	ld [wItemQuantity],a
+	call AddItemToInventory
 	ld a,[wDefaultMap]
 	ld [wDestinationMap],a
 	call SpecialWarpIn

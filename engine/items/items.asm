@@ -99,6 +99,21 @@ ItemUsePtrTable:
 	dw ItemUsePPRestore  ; MAX_ETHER
 	dw ItemUsePPRestore  ; ELIXER
 	dw ItemUsePPRestore  ; MAX_ELIXER
+	dw UnusableItem      ; B2F
+	dw UnusableItem      ; B1F
+	dw UnusableItem      ; 1F
+	dw UnusableItem      ; 2F
+	dw UnusableItem      ; 3F
+	dw UnusableItem      ; 4F
+	dw UnusableItem      ; 5F
+	dw UnusableItem      ; 6F
+	dw UnusableItem      ; 7F
+	dw UnusableItem      ; 8F
+	dw UnusableItem      ; 9F
+	dw UnusableItem      ; 10F
+	dw UnusableItem      ; 11F
+	dw UnusableItem      ; B4F
+	dw ItemUseCleanseTag ; CLEANSE TAG
 
 ItemUseBall:
 
@@ -1484,6 +1499,34 @@ ThrewBaitText:
 
 ThrewRockText:
 	TX_FAR _ThrewRockText
+	db "@"
+
+ItemUseCleanseTag:
+	ld a,[wIsInBattle]
+	and a
+	jp nz,ItemUseNotTime
+	ld hl,wd736
+	bit 5, [hl]
+	jr z, .setCleanse
+	res 5, [hl]
+	ld a, SFX_TURN_OFF_PC
+	ld hl,CleanseTagTurnOff
+	jr .continue
+.setCleanse
+	set 5, [hl]
+	ld a, SFX_HEAL_AILMENT
+	ld hl,CleanseTagTurnOn
+.continue
+	call PlaySound
+	call PrintText
+	ret
+
+CleanseTagTurnOn:
+	TX_FAR _CleanseTagTurnOn
+	db "@"
+
+CleanseTagTurnOff:
+	TX_FAR _CleanseTagTurnOff
 	db "@"
 
 ItemUseExpShare:
