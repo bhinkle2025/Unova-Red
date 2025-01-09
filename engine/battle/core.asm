@@ -899,6 +899,11 @@ FaintEnemyPokemon:
 	ld [wBattleResult], a
 	ld b, EXP_ALL
 	call IsItemInBag
+	ld a, [wFlags_D733]
+	jr z,.exp_all_check
+	res 5, a
+.exp_all_check
+	bit 5, a
 	push af
 	jr z, .giveExpToMonsThatFought ; if no exp all, then jump
 

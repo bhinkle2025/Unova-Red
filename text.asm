@@ -3207,6 +3207,16 @@ _UsedCutText::
 	line "away with CUT!"
 	prompt
 
+_ExpShareTurnOn::
+	text "[PLAYER] turned"
+	line "on Exp. Share."
+	prompt
+
+_ExpShareTurnOff::
+	text "[PLAYER] turned"
+	line "off Exp. Share."
+	prompt
+
 
 SECTION "Pokedex Text", ROMX, BANK[POKEDEX_TEXT]
 
