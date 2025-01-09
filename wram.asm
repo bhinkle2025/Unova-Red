@@ -2916,7 +2916,7 @@ wSeafoamIslands5CurScript:: ; d668
 wRoute18GateCurScript:: ; d669
 	ds 1
 
-	ds 72
+	;ds 72
 wVarSprites::
 wVarSprite1::
 	ds 1
