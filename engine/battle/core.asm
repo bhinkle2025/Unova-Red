@@ -4254,7 +4254,28 @@ GetDamageVarsForPlayerAttack:
 	ret z ; return if move power is zero
 	ld a, [hl] ; a = [wPlayerMoveType]
 	cp FIRE ; types >= FIRE are all special
-	jr nc, .specialAttack
+	ld a, [wPlayerMoveNum]
+	ld b, a
+	jr nc, .isSpecialActuallyPhysical
+	jr .isPhysicalActuallySpecial
+.isSpecialActuallyPhysical
+	ld hl, SpecialToPhysicalMoves
+.specialPhysicalLoop
+	ld a, [hli]
+	cp b
+	jr z, .physicalAttack
+	cp $ff ; end of list
+	jr nz, .specialPhysicalLoop ; keep checking list
+	jr .specialAttack ; Not actually a physical move
+.isPhysicalActuallySpecial
+	ld hl, PhysicalToSpecialMoves
+.physicalSpecialLoop
+	ld a, [hli]
+	cp b
+	jr z, .specialAttack ; the physical move is actually special
+	cp $ff ; end of list
+	jr nz, .physicalSpecialLoop ; keep checking list
+	; fallthrough
 .physicalAttack
 	ld hl, wEnemyMonDefense
 	ld a, [hli]
@@ -4367,7 +4388,28 @@ GetDamageVarsForEnemyAttack:
 	ret z ; return if move power is zero
 	ld a, [hl] ; a = [wEnemyMoveType]
 	cp FIRE ; types >= FIRE are all special
-	jr nc, .specialAttack
+	ld a, [wPlayerMoveNum]
+	ld b, a
+	jr nc, .isSpecialActuallyPhysical
+	jr .isPhysicalActuallySpecial
+.isSpecialActuallyPhysical
+	ld hl, SpecialToPhysicalMoves
+.specialPhysicalLoop
+	ld a, [hli]
+	cp b
+	jr z, .physicalAttack
+	cp $ff ; end of list
+	jr nz, .specialPhysicalLoop ; keep checking list
+	jr .specialAttack ; Not actually a physical move
+.isPhysicalActuallySpecial
+	ld hl, PhysicalToSpecialMoves
+.physicalSpecialLoop
+	ld a, [hli]
+	cp b
+	jr z, .specialAttack ; the physical move is actually special
+	cp $ff ; end of list
+	jr nz, .physicalSpecialLoop ; keep checking list
+	; fallthrough
 .physicalAttack
 	ld hl, wBattleMonDefense
 	ld a, [hli]
@@ -4467,6 +4509,8 @@ GetDamageVarsForEnemyAttack:
 	and a
 	and a
 	ret
+
+INCLUDE "data/physical_special_split.asm"
 
 ; get stat c of enemy mon
 ; c: stat to get (HP=1,Attack=2,Defense=3,Speed=4,Special=5)
@@ -8265,7 +8309,7 @@ ChargeEffect:
 	call PrintText
 	ld a, [wChargeMoveNum]
 	cp RAZOR_WIND
-	ld c, ATTACK_UP1_EFFECT
+	ld c, SPECIAL_UP1_EFFECT
 	jr z, .razorWindOrSkullBash
 	cp SKULL_BASH
 	ld c, DEFENSE_UP1_EFFECT
