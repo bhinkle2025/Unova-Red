@@ -96,4 +96,6 @@ ItemNames:
 	db "10F@"
 	db "11F@"
 	db "B4F@"
-	db "Cleanse Tag@"
+	db "CLEANSE TAG@"
+	db "TELEPORTER@"
+	db "POKé VIAL@"

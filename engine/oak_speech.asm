@@ -53,6 +53,11 @@ OakSpeech:
 	ld a,1
 	ld [wItemQuantity],a
 	call AddItemToInventory
+	ld a,TELEPORTER
+	ld [wcf91],a
+	ld a,1
+	ld [wItemQuantity],a   ; give a teleporter (in case we ever get stuck after loading a save) 
+	call AddItemToInventory
 	ld a,[wDefaultMap]
 	ld [wDestinationMap],a
 	call SpecialWarpIn

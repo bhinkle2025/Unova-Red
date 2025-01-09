@@ -100,6 +100,8 @@ SAFARI_ROCK           EQU $16 ; overload
 	const FLOOR_11F     ; $60
 	const FLOOR_B4F     ; $61
 	const CLEANSE_TAG   ; $62
+	const TELEPORTER    ; $63
+	const POKE_VIAL     ; $64
 
 const_value = $C4
 

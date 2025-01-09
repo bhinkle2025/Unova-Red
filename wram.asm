@@ -956,7 +956,7 @@ wWhichTrade:: ; cd3d
 
 wTrainerSpriteOffset:: ; cd3d
 
-wUnusedCD3D:: ; cd3d
+wPokeVialUses:: ; cd3d
 	ds 1
 
 wHUDPokeballGfxOffsetX:: ; cd3e

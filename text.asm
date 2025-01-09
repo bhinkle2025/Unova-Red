@@ -3242,6 +3242,21 @@ _ExpShareTurnOff::
 	line "off Exp. Share."
 	prompt
 
+_UsedPokeVialToHealText::
+	text "[PLAYER]'s party"
+	line "has been healed."
+	cont "Heals left before"
+	cont "revisiting a"
+	cont "#Center: @"
+	TX_RAM wcd6d
+	text "."
+	prompt
+
+_PokeVialNoMoreUsagesText::
+	text "Out of usages."
+	line "Replenish at"
+	cont "a #Center."
+	prompt
 
 SECTION "Pokedex Text", ROMX, BANK[POKEDEX_TEXT]
 

@@ -62,9 +62,30 @@ _VermilionCityText4::
 	line "building on this"
 	cont "plot of land."
 
-	para "My #MON is"
+	para "My #mon is"
 	line "tamping the land."
+	para "We did find this"
+	line "while digging."
+	cont "You want it?"
+	prompt
+
+_ReceivedPokeVialText::
+	text "[PLAYER] received"
+	line "@"
+	TX_RAM wcf4b
+	text "!@@"
+
+_PokeVialExplanationText::
+	text "The # Vial can"
+	line "heal your party"
+
+	para "between #mon"
+	line "Center visits!"
 	done
+
+_PokeVialNoRoomText::
+	text "Don't you want"
+	line "this?@@"
 
 _VermilionCityText5::
 	text "TIMBURR: Guoh!"

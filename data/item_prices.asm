@@ -97,3 +97,5 @@ ItemPrices:
 	money 0     ; FLOOR_11F
 	money 0     ; FLOOR_B4F
 	money 200   ; CleanseTag
+	money 0     ; Teleporter
+	money 0     ; PokeVial

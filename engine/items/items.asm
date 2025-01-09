@@ -114,6 +114,8 @@ ItemUsePtrTable:
 	dw UnusableItem      ; 11F
 	dw UnusableItem      ; B4F
 	dw ItemUseCleanseTag ; CLEANSE TAG
+	dw ItemUseTeleporter ; TELEPORTER
+	dw ItemUsePokeVial   ; POKEVIAL
 
 ItemUseBall:
 
@@ -1529,6 +1531,94 @@ CleanseTagTurnOff:
 	TX_FAR _CleanseTagTurnOff
 	db "@"
 
+ItemUsePokeVial:
+	ld a,[wIsInBattle]
+	and a
+	jp nz,ItemUseNotTime
+	call IsPokeVialAllowed
+	jp nc,ItemUseNotTime
+	ld a, [wPokeVialUses]
+	cp POKEVIAL_USAGES
+	jr nc, .outOfUsages
+	inc a
+	ld [wPokeVialUses], a
+	predef HealParty
+	ld a, SFX_HEAL_HP
+	call PlaySound
+	call GetPokeVialUsagesLeft
+	ld hl,UsedPokeVialToHealText
+	call PrintText
+	ret
+.outOfUsages
+	ld hl,PokeVialNoMoreUsagesText
+	call PrintText
+	ret
+
+GetPokeVialUsagesLeft:
+	;Copies the string of value (POKEVIAL_USAGES - [wPokeVialUses]) to wcd6d
+	push de
+	push bc
+	ld de,wcd6d
+	ld a, [wPokeVialUses]
+	ld b, a
+	ld a, POKEVIAL_USAGES
+	sub a, b
+	add $F6
+	ld [de],a
+	inc de
+	ld a,"@"
+	ld [de],a
+	pop bc
+	pop de
+	ret
+
+UsedPokeVialToHealText:
+	TX_FAR _UsedPokeVialToHealText
+	db "@"
+
+PokeVialNoMoreUsagesText:
+	TX_FAR _PokeVialNoMoreUsagesText
+	db "@"
+
+IsPokeVialAllowed::
+	; Not allowed to use in the Gyms or Elite Four
+	ld a,[wCurMap]
+	cp LORELEIS_ROOM
+	jr z, .notAllowed
+	cp BRUNOS_ROOM
+	jr z, .notAllowed
+	cp AGATHAS_ROOM
+	jr z, .notAllowed
+	cp LANCES_ROOM
+	jr z, .notAllowed
+	cp CHAMPIONS_ROOM
+	jr z, .notAllowed
+	cp HALL_OF_FAME
+	jr z, .notAllowed
+	cp VIRIDIAN_GYM
+	jr z, .notAllowed
+	cp PEWTER_GYM
+	jr z, .notAllowed
+	cp CERULEAN_GYM
+	jr z, .notAllowed
+	cp VERMILION_GYM
+	jr z, .notAllowed
+	cp CELADON_GYM
+	jr z, .notAllowed
+	cp FUCHSIA_GYM
+	jr z, .notAllowed
+	cp CINNABAR_GYM
+	jr z, .notAllowed
+	cp SAFFRON_GYM
+	jr z, .notAllowed
+	cp FIGHTING_DOJO
+	jr z, .notAllowed
+	scf
+	ret
+.notAllowed
+	and a
+	ret
+
 ItemUseExpShare:
 	ld a,[wIsInBattle]
 	and a
@@ -1557,6 +1647,12 @@ ExpShareTurnOff:
 	TX_FAR _ExpShareTurnOff
 	db "@"
 
+ItemUseTeleporter:
+	ld a,[wIsInBattle]
+	and a
+	jp nz,ItemUseNotTimeText
+	jp ItemUseEscapeRopeUse
+
 ; also used for Dig out-of-battle effect
 ItemUseEscapeRope:
 	ld a,[wIsInBattle]
@@ -1574,6 +1670,12 @@ ItemUseEscapeRope:
 	jr z,.notUsable
 	cp b
 	jr nz,.loop
+	call ItemUseEscapeRopeUse
+	jp RemoveUsedItem
+.notUsable
+	jp ItemUseNotTime
+
+ItemUseEscapeRopeUse:
 	ld hl,wd732
 	set 3,[hl]
 	set 6,[hl]
@@ -1592,9 +1694,7 @@ ItemUseEscapeRope:
 	call ItemUseReloadOverworldData
 	ld c,30
 	call DelayFrames
-	jp RemoveUsedItem
-.notUsable
-	jp ItemUseNotTime
+	ret
 
 EscapeRopeTilesets:
 	db FOREST, CEMETERY, CAVERN, FACILITY, INTERIOR
