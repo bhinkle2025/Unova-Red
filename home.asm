@@ -1483,10 +1483,19 @@ DisplayListMenuIDLoop::
 	ld a,[hl] ; a = item quantity
 	ld [wMaxItemQuantity],a
 .skipGettingQuantity
+	cp HM_01
 	ld a,[wcf91]
 	ld [wd0b5],a
 	ld a,BANK(ItemNames)
 	ld [wPredefBank],a
+	jr c, .go_get_name
+	;else it's a tm/hm
+	ld a, BANK(tmhmNames)
+	ld [wPredefBank], a
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+.go_get_name
+	ld a,ITEM_NAME
+	ld [wNameListType],a
 	call GetName
 	jr .storeChosenEntry
 .pokemonList
@@ -1906,21 +1915,20 @@ GetItemName::
 ;     starting at wcd6d
 	push hl
 	push bc
+	ld a, ITEM_NAME
+	ld [wNameListType], a
 	ld a,[wd11e]
+	ld [wd0b5], a
 	cp HM_01 ; is this a TM/HM?
 	jr nc,.Machine
-
-	ld [wd0b5],a
-	ld a,ITEM_NAME
-	ld [wNameListType],a
 	ld a,BANK(ItemNames)
-	ld [wPredefBank],a
-	call GetName
 	jr .Finish
 
 .Machine
-	call GetMachineName
+	ld a, BANK(tmhmNames)
 .Finish
+	ld [wPredefBank], a
+	call GetName
 	ld de,wcd6d ; pointer to where item name is stored in RAM
 	pop bc
 	pop hl
@@ -3214,7 +3222,7 @@ WaitForSoundToFinish::
 NamePointers::
 	dw MonsterNames
 	dw MoveNames
-	dw UnusedNames
+	dw tmhmNames
 	dw ItemNames
 	dw wPartyMonOT ; player's OT names list
 	dw wEnemyMonOT ; enemy's OT names list
@@ -3227,14 +3235,32 @@ GetName::
 ; [wPredefBank] = bank of list
 ;
 ; returns pointer to name in de
+	ld a,[wNameListType]
+	cp ITEM_NAME
 	ld a,[wd0b5]
 	ld [wd11e],a
+	jr nz, .noItem
 
-	; TM names are separate from item names.
-	; BUG: This applies to all names instead of just items.
-	cp HM_01
-	jp nc, GetMachineName
-
+	;joenote - fixing the aforementioned bug
+	push bc
+	ld b, a
+	ld a, [wNameListType]
+	cp ITEM_NAME
+	ld a, b
+	pop bc
+	jr nz, .noItem	;if the list type is not items, then A cannot be referring to a machine
+	;At this line, definitely working with an item list. So see if it's a machine or item
+	cp HM_01        ;it's TM/HM
+	;jp nc,GetMachineName	;joenote - function removed. Handle list-based tm & hm names here.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;joenote - do some stuff if the item is a machine
+	jr c, .noItem
+	sub (HM_01 - 1)	;need to shift things because tm and hm constants are offset by +$C3 from the first item constant
+	ld [wd0b5], a
+	ld a, TMHM_NAME	
+	ld [wNameListType], a
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+.noItem          ; Return here if not an item
 	ld a,[H_LOADEDROMBANK]
 	push af
 	push hl

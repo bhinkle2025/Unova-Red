@@ -84,6 +84,8 @@ INCLUDE "engine/remove_pokemon.asm"
 
 INCLUDE "engine/display_pokedex.asm"
 
+INCLUDE "text/tmhm_names.asm"
+
 SECTION "bank3",ROMX,BANK[$3]
 
 INCLUDE "engine/joypad.asm"
