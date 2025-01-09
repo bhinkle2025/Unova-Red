@@ -130,10 +130,8 @@ StartMenu_Pokemon:
 	dw .teleport
 	dw .softboiled
 .fly
-	bit 2,a ; does the player have the Thunder Badge?
-	jp z,.newBadgeRequired
-	call CheckIfInOutsideMap
-	jr z,.canFly
+	callab CheckIfCanFly
+	jr c, .canFly
 	ld a,[wWhichPokemon]
 	ld hl,wPartyMonNicks
 	call GetPartyMonName
