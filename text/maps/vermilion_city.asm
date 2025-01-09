@@ -70,7 +70,7 @@ _VermilionCityText4::
 	prompt
 
 _ReceivedPokeVialText::
-	text "[PLAYER] received"
+	text "<PLAYER> received"
 	line "@"
 	TX_RAM wcf4b
 	text "!@@"

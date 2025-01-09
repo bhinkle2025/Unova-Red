@@ -3243,7 +3243,7 @@ _ExpShareTurnOff::
 	prompt
 
 _UsedPokeVialToHealText::
-	text "[PLAYER]'s party"
+	text "<PLAYER>'s party"
 	line "has been healed."
 	cont "Heals left before"
 	cont "revisiting a"
