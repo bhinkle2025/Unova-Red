@@ -442,6 +442,7 @@ CooltrainerMAI:
 
 CooltrainerFAI:
 	cp $40
+	ret nc
 	ld a,$A
 	call AICheckIfHPBelowFraction
 	jp c,AIUseHyperPotion
