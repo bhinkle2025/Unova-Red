@@ -1646,6 +1646,8 @@ ItemUsePokedoll:
 	ld a,[wIsInBattle]
 	dec a
 	jp nz,ItemUseNotTime
+	call IsGhostBattle
+	jp z, ItemUseNotTime ; jump if it's a ghost battle
 	ld a,$01
 	ld [wEscapedFromBattle],a
 	jp PrintItemUseTextAndRemoveItem
