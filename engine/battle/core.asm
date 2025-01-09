@@ -8262,7 +8262,25 @@ ChargeEffect:
 	ld a, [de]
 	ld [wChargeMoveNum], a
 	ld hl, ChargeMoveEffectText
-	jp PrintText
+	call PrintText
+	ld a, [wChargeMoveNum]
+	cp RAZOR_WIND
+	ld c, ATTACK_UP1_EFFECT
+	jr z, .razorWindOrSkullBash
+	cp SKULL_BASH
+	ld c, DEFENSE_UP1_EFFECT
+	jr z, .razorWindOrSkullBash
+	ret
+.razorWindOrSkullBash
+	ld a, [H_WHOSETURN]
+	and a
+	ld a, c
+	jr z, .notEnemyTurn
+	ld [wEnemyMoveEffect], a
+	jp StatModifierUpEffect
+.notEnemyTurn
+	ld [wPlayerMoveEffect], a
+	jp StatModifierUpEffect
 
 ChargeMoveEffectText:
 	TX_FAR _ChargeMoveEffectText
