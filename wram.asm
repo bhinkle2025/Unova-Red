@@ -2952,7 +2952,7 @@ wTownVisitedFlag:: ; d70b
 	flag_array 13
 
 wSafariSteps:: ; d70d
-; starts at 502
+; starts at 752
 	ds 2
 
 wFossilItem:: ; d70f
