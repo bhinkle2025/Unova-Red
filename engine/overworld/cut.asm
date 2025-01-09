@@ -56,6 +56,7 @@ UsedCut:
 	call InitCutAnimOAM
 	ld de, CutTreeBlockSwaps
 	call ReplaceTreeTileBlock
+	callba SetCutTreeFlags
 	call RedrawMapView
 	callba AnimCut
 	ld a, $1
@@ -235,6 +236,10 @@ ReplaceTreeTileBlock:
 	pop de
 	ld a, [hl]
 	ld c, a
+	call LoopForTileReplacement
+	ld [hl], a
+	ret
+LoopForTileReplacement: ; find the matching tile block in the array
 .loop ; find the matching tile block in the array
 	ld a, [de]
 	inc de
@@ -245,7 +250,14 @@ ReplaceTreeTileBlock:
 	jr nz, .loop
 	dec de
 	ld a, [de] ; replacement tile block from matching array entry
-	ld [hl], a
+	ret
+
+FindTileBlockReplacementCut::
+	ld de, CutTreeBlockSwaps
+	ld a, [wNewTileBlockID]
+	ld c, a
+	call LoopForTileReplacement
+	ld [wNewTileBlockID], a
 	ret
 
 CutTreeBlockSwaps:

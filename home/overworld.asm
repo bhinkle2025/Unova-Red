@@ -681,6 +681,7 @@ CheckMapConnections::
 ; $C2XE without loading any tile patterns.
 	callba InitMapSprites
 	call LoadTileBlockMap
+	callba RemoveAlreadyCutTrees
 	jp OverworldLoopLessDelay
 
 .didNotEnterConnectedMap
@@ -2339,6 +2340,7 @@ LoadMapData::
 	call LoadMapHeader
 	callba InitMapSprites ; load tile pattern data for sprites
 	call LoadTileBlockMap
+	callba RemoveAlreadyCutTrees
 	call LoadTilesetTilePatternData
 	call LoadCurrentMapView
 ; copy current map view to VRAM

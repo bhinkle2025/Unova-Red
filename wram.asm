@@ -3177,7 +3177,10 @@ ENDU
 wTrainerHeaderPtr:: ; da30
 	ds 2
 
-	ds 6
+wCutTrees::
+; Check CutTreeLocations for the indexes
+	ds 3
+	ds 3
 
 wOpponentAfterWrongAnswer:: ; da38
 ; the trainer the player must face after getting a wrong answer in the Cinnabar
