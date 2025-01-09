@@ -1948,8 +1948,6 @@ DrawPlayerHUDAndHPBar:
 	ld [wChannelSoundIDs + Ch4], a
 	ret
 .setLowHealthAlarm
-	ld hl, wLowHealthAlarm
-	set 7, [hl] ;enable low health alarm
 	ret
 
 DrawEnemyHUDAndHPBar:
