@@ -1427,8 +1427,8 @@ _GainedText::
 	line "@@"
 
 _WithExpAllText::
-	text "with EXP.ALL,"
-	cont "@@"
+	text "Party gained"
+	next "@"
 
 _BoostedText::
 	text "a boosted"
