@@ -68,10 +68,15 @@ OverworldLoopLessDelay::
 	bit 7,a ; are we simulating button presses?
 	jr z,.notSimulating
 	ld a,[hJoyHeld]
-	jr .checkIfStartIsPressed
+	jr .checkIfSelectIsPressed
 .notSimulating
 	ld a,[hJoyPressed]
-.checkIfStartIsPressed
+.checkIfSelectIsPressed
+	bit 2,a ; select button
+	jr z,.selectButtonNotPressed
+; if SELECT is pressed
+	callba TryRideBike
+.selectButtonNotPressed
 	bit 3,a ; start button
 	jr z,.startButtonNotPressed
 ; if START is pressed
@@ -2449,9 +2454,3 @@ ResetUsingStrengthOutOfBattleBit:
 	ld hl, wd728
 	res 0, [hl]
 	ret
-
-ForceBikeOrSurf::
-	ld b, BANK(RedSprite)
-	ld hl, LoadPlayerSpriteGraphics
-	call Bankswitch
-	jp PlayDefaultMusic ; update map/player state?

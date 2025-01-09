@@ -128,7 +128,7 @@ SeaFoamIslands5Script_46872:
 	xor a
 	ld [wWalkBikeSurfState], a
 	ld [wWalkBikeSurfStateCopy], a
-	jp ForceBikeOrSurf
+	jpba ForceBikeOrSurf
 
 SeafoamIslands5TextPointers:
 	dw BoulderText

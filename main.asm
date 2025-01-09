@@ -1956,6 +1956,7 @@ INCLUDE "engine/in_game_trades.asm"
 INCLUDE "engine/palettes.asm"
 INCLUDE "engine/save.asm"
 INCLUDE "engine/overworld/field_moves.asm"
+INCLUDE "engine/overworld/bike_shortcut.asm"
 
 
 SECTION "bank1D",ROMX,BANK[$1D]

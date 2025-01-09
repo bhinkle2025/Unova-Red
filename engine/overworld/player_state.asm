@@ -70,7 +70,7 @@ CheckForceBikeOrSurf:
 	ld a, $1
 	ld [wWalkBikeSurfState], a
 	ld [wWalkBikeSurfStateCopy], a
-	jp ForceBikeOrSurf
+	jpba ForceBikeOrSurf
 .incorrectMap
 	inc hl
 .incorrectY
@@ -80,7 +80,7 @@ CheckForceBikeOrSurf:
 	ld a, $2
 	ld [wWalkBikeSurfState], a
 	ld [wWalkBikeSurfStateCopy], a
-	jp ForceBikeOrSurf
+	jpba ForceBikeOrSurf
 
 INCLUDE "data/force_bike_surf.asm"
 
