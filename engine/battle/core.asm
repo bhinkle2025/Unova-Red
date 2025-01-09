@@ -158,14 +158,6 @@ SlidePlayerAndEnemySilhouettesOnScreen:
 	ld [rOBP0], a
 	ld [rOBP1], a
 .slideSilhouettesLoop ; slide silhouettes of the player's pic and the enemy's pic onto the screen
-	ld h, b
-	ld l, $40
-	call SetScrollXForSlidingPlayerBodyLeft ; begin background scrolling on line $40
-	inc b
-	inc b
-	ld h, $0
-	ld l, $60
-	call SetScrollXForSlidingPlayerBodyLeft ; end background scrolling on line $60
 	call SlidePlayerHeadLeft
 	ld a, c
 	ld [hSCX], a
@@ -2173,9 +2165,16 @@ DisplayBattleMenu:
 	ld a, $1
 	ld [hli], a ; wMaxMenuItem
 	ld [hl], D_RIGHT | A_BUTTON ; wMenuWatchedKeys
+	ld a, [wIsInBattle]
+	dec a
+	jr nz, .leftColumn_WaitForInput_BPressedIgnore
+	ld [hl], D_RIGHT | A_BUTTON | B_BUTTON ; wMenuWatchedKeys
+.leftColumn_WaitForInput_BPressedIgnore
 	call HandleMenuInput
 	bit 4, a ; check if right was pressed
 	jr nz, .rightColumn
+	bit BIT_B_BUTTON, a
+	jr nz, .BButtonPressed
 	jr .AButtonPressed ; the A button was pressed
 .rightColumn ; put cursor in right column of menu
 	ld a, [wBattleType]
@@ -2205,14 +2204,26 @@ DisplayBattleMenu:
 	inc hl
 	ld a, $1
 	ld [hli], a ; wMaxMenuItem
+	ld a, [wIsInBattle]
+	dec a
 	ld a, D_LEFT | A_BUTTON
+	jr nz, .rightColumn_WaitForInput_BPressedIgnore
+	ld a, D_LEFT | A_BUTTON | B_BUTTON
+.rightColumn_WaitForInput_BPressedIgnore
 	ld [hli], a ; wMenuWatchedKeys
 	call HandleMenuInput
 	bit 5, a ; check if left was pressed
-	jr nz, .leftColumn ; if left was pressed, jump
+	jp nz, .leftColumn ; if left was pressed, jump
+	bit BIT_B_BUTTON, a
+	jr nz, .BButtonPressed
 	ld a, [wCurrentMenuItem]
 	add $2 ; if we're in the right column, the actual id is +2
 	ld [wCurrentMenuItem], a
+	jr .AButtonPressed
+.BButtonPressed
+	ld a, $1
+	ld [wCurrentMenuItem], a
+	jr .rightColumn
 .AButtonPressed
 	call PlaceUnfilledArrowMenuCursor
 	ld a, [wBattleType]
