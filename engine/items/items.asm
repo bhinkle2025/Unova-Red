@@ -1715,6 +1715,8 @@ CardKeyTable3:
 
 ItemUsePokedoll:
 	ld a,[wIsInBattle]
+	and a
+	jp z,.noTrainerEnc
 	dec a
 	jp nz,ItemUseNotTime
 	call IsGhostBattle
@@ -1722,6 +1724,30 @@ ItemUsePokedoll:
 	ld a,$01
 	ld [wEscapedFromBattle],a
 	jp PrintItemUseTextAndRemoveItem
+.noTrainerEnc
+	ld hl,wd736
+	bit 4, [hl]
+	jr z, .setDoll
+	res 4, [hl]
+	ld a, SFX_TURN_OFF_PC
+	ld hl,PokeDollTurnOff
+	jr .continue
+.setDoll
+	set 4, [hl]
+	ld a, SFX_HEAL_AILMENT
+	ld hl,PokeDollTurnOn
+.continue
+	call PlaySound
+	call PrintText
+	ret
+
+PokeDollTurnOn:
+	TX_FAR _PokeDollTurnOn
+	db "@"
+
+PokeDollTurnOff:
+	TX_FAR _PokeDollTurnOff
+	db "@"
 
 ItemUseGuardSpec:
 	ld a,[wIsInBattle]
@@ -2384,7 +2410,8 @@ RemoveUsedItem:
 	ld hl,wNumBagItems
 	ld a,1 ; one item
 	ld [wItemQuantity],a
-	jp RemoveItemFromInventory
+	call RemoveItemFromInventory
+	jp RemoveCleanseTagAndPokedollEffects
 
 ItemUseNoEffect:
 	ld hl,ItemUseNoEffectText
@@ -2685,6 +2712,7 @@ TossItem_:
 	push hl
 	ld a,[wWhichPokemon]
 	call RemoveItemFromInventory
+	call RemoveCleanseTagAndPokedollEffects
 	ld a,[wcf91]
 	ld [wd11e],a
 	call GetItemName
@@ -3050,4 +3078,30 @@ CheckMapForMon:
 	dec b
 	jr nz, .loop
 	dec hl
+	ret
+
+; If the item you're removing from your bag is a pokedoll or cleanse tag,
+; remove its effect if it's the last one in the bag
+; [wcf91] = item ID
+; [wMaxItemQuantity] = Quantity remaining (0 if there are none left)
+RemoveCleanseTagAndPokedollEffects::
+	ld a,[wMaxItemQuantity]
+	and a
+	ret nz
+	ld hl,wd736 
+	ld a,[wcf91]
+	cp CLEANSE_TAG
+	jr nz, .notCleanseTag
+	res 5, [hl] ; turn off ignoring wild encounters
+	ret
+.notCleanseTag
+	cp POKE_DOLL
+	jr nz, .notPokeDoll
+	res 4, [hl] ; turn off ignoring trainers
+	ret
+.notPokeDoll
+	cp EXP_ALL
+	ret nz
+	ld hl,wFlags_D733
+	res 5, [hl]
 	ret

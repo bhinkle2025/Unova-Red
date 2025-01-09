@@ -2881,6 +2881,19 @@ _CleanseTagTurnOff::
 	line "off Cleanse Tag."
 	prompt
 
+_PokeDollTurnOn::
+	text "<PLAYER> took out"
+	line "the Poke Doll,"
+	cont "causing trainers"
+	cont "to avoid eye"
+	cont "contact."
+	prompt
+
+_PokeDollTurnOff::
+	text "<PLAYER> put the"
+	line "Poke Doll away."
+	prompt
+
 _PlayedFluteNoEffectText::
 	text "Played the #"
 	line "FLUTE."

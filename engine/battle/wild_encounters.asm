@@ -5,6 +5,7 @@ TryDoWildEncounter:
 	and a
 	ret nz
 	ld a, [wd736]
+	res 4, a ; Ignore the pokedoll's effect
 	and a
 	ret nz
 	callab IsPlayerStandingOnDoorTileOrWarpTile
