@@ -390,7 +390,7 @@ MainInBattleLoop:
 	and a
 	ret nz ; return if pokedoll was used to escape from battle
 	ld a, [wBattleMonStatus]
-	and (1 << FRZ) | SLP ; is mon frozen or asleep?
+	and (1 << FRZ) ; is mon frozen?
 	jr nz, .selectEnemyMove ; if so, jump
 	ld a, [wPlayerBattleStatus1]
 	and (1 << StoringEnergy) | (1 << UsingTrappingMove) ; check player is using Bide or using a multi-turn attack like wrap
@@ -3414,6 +3414,7 @@ CheckPlayerStatusConditions:
 .WakeUp
 	ld hl,WokeUpText
 	call PrintText
+	jr .FrozenCheck
 .sleepDone
 	xor a
 	ld [wPlayerUsedMove],a
@@ -5958,6 +5959,7 @@ CheckEnemyStatusConditions:
 .wokeUp
 	ld hl, WokeUpText
 	call PrintText
+	jr .checkIfFrozen
 .sleepDone
 	xor a
 	ld [wEnemyUsedMove], a
@@ -7321,6 +7323,8 @@ SleepEffect:
 ; set target's sleep counter to a random number between 1 and 7
 	call BattleRandom
 	and $7
+	jr z, .setSleepCounter
+	cp $7
 	jr z, .setSleepCounter
 	ld [de], a
 	call PlayCurrentMoveAnimation2
