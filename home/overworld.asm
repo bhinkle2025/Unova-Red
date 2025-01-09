@@ -79,6 +79,16 @@ OverworldLoopLessDelay::
 	ld [hSpriteIndexOrTextID],a ; start menu text ID
 	jp .displayDialogue
 .startButtonNotPressed
+	bit 1,a ; b button
+	jr z,.bButtonNotPressed
+	ld hl,wFlags_D733
+	bit 6, [hl]
+	jr z, .setRun
+	res 6, [hl]
+	jr .bButtonNotPressed
+.setRun
+	set 6, [hl]
+.bButtonNotPressed
 	bit 0,a ; A button
 	jp z,.checkIfDownButtonIsPressed
 ; if A is pressed
@@ -283,7 +293,25 @@ OverworldLoopLessDelay::
 	bit 6,a ; jumping a ledge?
 	jr nz,.normalPlayerSpriteAdvancement
 	call DoBikeSpeedup
+	call DoBikeSpeedup
+	call DoBikeSpeedup
+	jr .notRunning
 .normalPlayerSpriteAdvancement
+	; surf at 2x walking speed
+	ld a, [wWalkBikeSurfState]
+	cp $02
+	jr z, .surfFaster
+	; Holding B makes you run at 2x walking speed
+	ld a, [hJoyHeld]
+	and B_BUTTON
+	jr nz, .surfFaster
+	ld hl,wFlags_D733
+	bit 6, [hl]
+	jr z, .notRunning
+.surfFaster
+	call DoBikeSpeedup
+.notRunning
+	;original .normalPlayerSpriteAdvancement continues here
 	call AdvancePlayerSprite
 	ld a,[wWalkCounter]
 	and a
