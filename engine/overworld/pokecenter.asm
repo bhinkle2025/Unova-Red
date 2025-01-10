@@ -38,6 +38,8 @@ DisplayPokemonCenterDialogue_:
 .done
 	ld hl, PokemonCenterFarewellText
 	call PrintText
+	ld a, PLAYER_DIR_DOWN
+	ld [wPlayerMovingDirection], a
 	jp UpdateSprites
 
 PokemonCenterWelcomeText:
