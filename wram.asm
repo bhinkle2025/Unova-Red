@@ -956,7 +956,7 @@ wWhichTrade:: ; cd3d
 
 wTrainerSpriteOffset:: ; cd3d
 
-wPokeVialUses:: ; cd3d
+wUnusedCD3D:: ; cd3d
 	ds 1
 
 wHUDPokeballGfxOffsetX:: ; cd3e
@@ -2338,7 +2338,7 @@ wPartyMonNicks:: ds NAME_LENGTH * PARTY_LENGTH ; d2b5
 wPartyDataEnd::
 
 
-wMainDataStart::
+wMainDataStart::  ; Saving Starts
 
 wPokedexOwned:: ; d2f7
 	flag_array NUM_POKEMON
@@ -2678,7 +2678,7 @@ wNumHoFTeams:: ; d5a2
 ; number of HOF teams
 	ds 1
 
-wUnusedD5A3:: ; d5a3
+wPokeVialUses:: ; d5a3
 	ds 1
 
 wPlayerCoins:: ; d5a4
@@ -3230,7 +3230,7 @@ wDayCareMonOT::   ds NAME_LENGTH ; da54
 
 wDayCareMon:: box_struct wDayCareMon ; da5f
 
-wMainDataEnd::
+wMainDataEnd::  ;  Saving Ends
 
 
 wBoxDataStart::
