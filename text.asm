@@ -99,7 +99,7 @@ _OaksAideHiText::
 	text ""
 	line "kinds of #MON,"
 	cont "I'm supposed to"
-	cont "give you an"
+	cont "reward you with"
 	cont "@"
 	TX_RAM wOaksAideRewardItemName
 	text "!"

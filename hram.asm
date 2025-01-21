@@ -288,6 +288,7 @@ hOaksAideResult       EQU $FFDB
 hOaksAideRequirement  EQU $FFDB ; required number of owned mons
 hOaksAideRewardItem   EQU $FFDC
 hOaksAideNumMonsOwned EQU $FFDD
+hOaksAideRewardQaunt  EQU $FFDE
 
 hItemToRemoveID    EQU $FFDB
 hItemToRemoveIndex EQU $FFDC

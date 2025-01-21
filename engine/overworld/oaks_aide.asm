@@ -20,7 +20,8 @@ OaksAideScript:
 	call PrintText
 	ld a, [hOaksAideRewardItem]
 	ld b, a
-	ld c, 1
+	ld a, [hOaksAideRewardQaunt]
+	ld c, a
 	call GiveItem
 	jr nc, .bagFull
 	ld hl, OaksAideGotItemText

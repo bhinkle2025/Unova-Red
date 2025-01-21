@@ -358,6 +358,20 @@ _OaksLabText_1d405::
 	line "PROF.OAK's AIDE."
 	done
 
+_OaksLabText_4968c::
+	text "EXP.ALL gives"
+	line "EXP points to all"
+	cont "the #MON with"
+	cont "you, even if they"
+	cont "don't fight."
+
+	para "It does, however,"
+	line "reduce the amount"
+	cont "of EXP for each"
+	cont "#MON."
+	done
+
+
 _OaksLabText_441cc::
 	text "#DEX comp-"
 	line "letion is:"
