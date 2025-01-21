@@ -255,6 +255,8 @@ NothingToSort::
 ItemSortList::
 	; Used Key Items
 	db CLEANSE_TAG
+	db POKE_DOLL
+	db POKE_VIAL
 	db BICYCLE
 	db ITEMFINDER
 	db EXP_ALL
@@ -275,7 +277,6 @@ ItemSortList::
 	db MAX_REPEL
 	db TELEPORTER
 	db ESCAPE_ROPE
-	db POKE_DOLL
 	; Health
 	db POTION
 	db SUPER_POTION
