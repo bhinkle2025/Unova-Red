@@ -2018,12 +2018,6 @@ _GameSavedText::
 	line "the game!"
 	done
 
-_OlderFileWillBeErasedText::
-	text "The older file"
-	line "will be erased to"
-	cont "save. Okay?"
-	done
-
 _WhenYouChangeBoxText::
 	text "When you change a"
 	line "#MON BOX, data"
