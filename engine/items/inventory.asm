@@ -147,4 +147,59 @@ RemoveItemFromInventory_:
 .skipMovingUpSlots
 	pop hl
 .done
+	jr RemoveCleanseTagAndPokedollEffects
+
+; removes one of the specified item ID [hItemToRemoveID] from bag (if existent)
+RemoveItemByID:
+	ld hl, wBagItems
+	ld a, [hItemToRemoveID]
+	ld b, a
+	xor a
+	ld [hItemToRemoveIndex], a
+.loop
+	ld a, [hli]
+	cp -1 ; reached terminator?
+	ret z
+	cp b
+	jr z, .foundItem
+	inc hl
+	ld a, [hItemToRemoveIndex]
+	inc a
+	ld [hItemToRemoveIndex], a
+	jr .loop
+.foundItem
+	ld a, $1
+	ld [wItemQuantity], a
+	ld a, [hItemToRemoveIndex]
+	ld [wWhichPokemon], a
+	ld hl, wNumBagItems
+	call RemoveItemFromInventory
+	ld a, [hItemToRemoveID]
+	ld [wcf91],a
+	jr RemoveCleanseTagAndPokedollEffects
+
+; If the item you're removing from your bag is a pokedoll or cleanse tag,
+; remove its effect if it's the last one in the bag
+; [wcf91] = item ID
+; [wMaxItemQuantity] = Quantity remaining (0 if there are none left)
+RemoveCleanseTagAndPokedollEffects::
+	ld a,[wMaxItemQuantity]
+	and a
+	ret nz
+	ld hl,wd736 
+	ld a,[wcf91]
+	cp CLEANSE_TAG
+	jr nz, .notCleanseTag
+	res 5, [hl] ; turn off ignoring wild encounters
+	ret
+.notCleanseTag
+	cp POKE_DOLL
+	jr nz, .notPokeDoll
+	res 4, [hl] ; turn off ignoring trainers
+	ret
+.notPokeDoll
+	cp EXP_ALL
+	ret nz
+	ld hl,wFlags_D733
+	res 5, [hl]
 	ret

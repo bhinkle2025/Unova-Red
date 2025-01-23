@@ -80,8 +80,6 @@ INCLUDE "engine/battle/moveEffects/drain_hp_effect.asm"
 
 INCLUDE "engine/menu/players_pc.asm"
 
-INCLUDE "engine/remove_pokemon.asm"
-
 INCLUDE "engine/display_pokedex.asm"
 
 INCLUDE "text/tmhm_names.asm"
@@ -1957,6 +1955,7 @@ INCLUDE "engine/palettes.asm"
 INCLUDE "engine/save.asm"
 INCLUDE "engine/overworld/field_moves.asm"
 INCLUDE "engine/overworld/bike_shortcut.asm"
+INCLUDE "engine/remove_pokemon.asm"
 
 
 SECTION "bank1D",ROMX,BANK[$1D]

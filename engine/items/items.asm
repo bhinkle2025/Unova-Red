@@ -2532,8 +2532,7 @@ RemoveUsedItem:
 	ld hl,wNumBagItems
 	ld a,1 ; one item
 	ld [wItemQuantity],a
-	call RemoveItemFromInventory
-	jp RemoveCleanseTagAndPokedollEffects
+	jp RemoveItemFromInventory
 
 ItemUseNoEffect:
 	ld hl,ItemUseNoEffectText
@@ -2625,6 +2624,33 @@ GotOffBicycleText:
 	TX_LINE
 	TX_FAR _GotOffBicycleText2
 	db "@"
+
+IsBikeRidingAllowed::
+; The bike can be used on Route 23 and Indigo Plateau,
+; or maps with tilesets in BikeRidingTilesets.
+; Return carry if biking is allowed.
+
+	ld a, [wCurMap]
+	cp ROUTE_23
+	jr z, .allowed
+	cp INDIGO_PLATEAU
+	jr z, .allowed
+
+	ld a, [wCurMapTileset]
+	ld b, a
+	ld hl, BikeRidingTilesets
+.loop
+	ld a, [hli]
+	cp b
+	jr z, .allowed
+	inc a
+	jr nz, .loop
+	and a
+	ret
+
+.allowed
+	scf
+	ret
 
 ; restores bonus PP (from PP Ups) when healing at a pokemon center
 ; also, when a PP Up is used, it increases the current PP by one PP Up bonus
@@ -2834,7 +2860,6 @@ TossItem_:
 	push hl
 	ld a,[wWhichPokemon]
 	call RemoveItemFromInventory
-	call RemoveCleanseTagAndPokedollEffects
 	ld a,[wcf91]
 	ld [wd11e],a
 	call GetItemName
@@ -3202,28 +3227,3 @@ CheckMapForMon:
 	dec hl
 	ret
 
-; If the item you're removing from your bag is a pokedoll or cleanse tag,
-; remove its effect if it's the last one in the bag
-; [wcf91] = item ID
-; [wMaxItemQuantity] = Quantity remaining (0 if there are none left)
-RemoveCleanseTagAndPokedollEffects::
-	ld a,[wMaxItemQuantity]
-	and a
-	ret nz
-	ld hl,wd736 
-	ld a,[wcf91]
-	cp CLEANSE_TAG
-	jr nz, .notCleanseTag
-	res 5, [hl] ; turn off ignoring wild encounters
-	ret
-.notCleanseTag
-	cp POKE_DOLL
-	jr nz, .notPokeDoll
-	res 4, [hl] ; turn off ignoring trainers
-	ret
-.notPokeDoll
-	cp EXP_ALL
-	ret nz
-	ld hl,wFlags_D733
-	res 5, [hl]
-	ret
