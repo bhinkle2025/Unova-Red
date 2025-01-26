@@ -98,7 +98,21 @@ AddItemToInventory_:
 ; [wWhichPokemon] = index (within the inventory) of the item to remove
 ; [wItemQuantity] = quantity to remove
 RemoveItemFromInventory_:
+	push bc
 	push hl
+	ld a,[hl]
+	ld b,a  ; We temporarily store the number of items in the inventory, but set it to zero if we use the box
+	ld de, wNumBagItems
+	ld a, d
+	cp h
+	jr nz, .notBag
+	ld a, e
+	cp l
+	jr z, .findItem
+.notBag
+	xor a
+	ld b,a
+.findItem
 	inc hl
 	ld a,[wWhichPokemon] ; index (within the inventory) of the item being removed
 	sla a
@@ -107,6 +121,7 @@ RemoveItemFromInventory_:
 	jr nc,.noCarry
 	inc h
 .noCarry
+	ld c, [hl]  ; Holds the item ID of what we're pitching
 	inc hl
 	ld a,[wItemQuantity] ; quantity being removed
 	ld e,a
@@ -118,6 +133,28 @@ RemoveItemFromInventory_:
 	jr nz,.skipMovingUpSlots
 ; if the remaining quantity is 0,
 ; remove the emptied item slot and move up all the following item slots
+	ld a,b
+	and a
+	jr z, .moveSlotsUp
+	push hl
+	ld hl,wd736 
+	ld a,c
+	cp CLEANSE_TAG
+	jr nz, .checkPokeDoll
+	res 5, [hl] ; turn off ignoring wild encounters
+	jr .itemFlagsDone
+.checkPokeDoll
+	cp POKE_DOLL
+	jr nz, .checkExpShare
+	res 4, [hl] ; turn off ignoring trainers
+	jr .itemFlagsDone
+.checkExpShare
+	cp EXP_ALL
+	jr nz, .itemFlagsDone
+	ld hl,wFlags_D733
+	res 5, [hl]
+.itemFlagsDone
+	pop hl
 .moveSlotsUp
 	ld e,l
 	ld d,h
@@ -147,7 +184,7 @@ RemoveItemFromInventory_:
 .skipMovingUpSlots
 	pop hl
 .done
-	jr RemoveCleanseTagAndPokedollEffects
+	pop bc
 
 ; removes one of the specified item ID [hItemToRemoveID] from bag (if existent)
 RemoveItemByID:
@@ -176,30 +213,5 @@ RemoveItemByID:
 	call RemoveItemFromInventory
 	ld a, [hItemToRemoveID]
 	ld [wcf91],a
-	jr RemoveCleanseTagAndPokedollEffects
+	ret
 
-; If the item you're removing from your bag is a pokedoll or cleanse tag,
-; remove its effect if it's the last one in the bag
-; [wcf91] = item ID
-; [wMaxItemQuantity] = Quantity remaining (0 if there are none left)
-RemoveCleanseTagAndPokedollEffects::
-	ld a,[wMaxItemQuantity]
-	and a
-	ret nz
-	ld hl,wd736 
-	ld a,[wcf91]
-	cp CLEANSE_TAG
-	jr nz, .notCleanseTag
-	res 5, [hl] ; turn off ignoring wild encounters
-	ret
-.notCleanseTag
-	cp POKE_DOLL
-	jr nz, .notPokeDoll
-	res 4, [hl] ; turn off ignoring trainers
-	ret
-.notPokeDoll
-	cp EXP_ALL
-	ret nz
-	ld hl,wFlags_D733
-	res 5, [hl]
-	ret
