@@ -305,8 +305,6 @@ StartMenu_Item:
 	call PrintText
 	jr .exitMenu
 .notInCableClubRoom
-	ld hl,wFlags_0xcd60
-	set 2,[hl]
 	ld bc,wNumBagItems
 	ld hl,wListPointer
 	ld a,c
@@ -324,8 +322,6 @@ StartMenu_Item:
 	ld [wBagSavedMenuItem],a
 	jr nc,.choseItem
 .exitMenu
-	ld hl,wFlags_0xcd60
-	res 2,[hl]
 	call LoadScreenTilesFromBuffer2 ; restore saved screen
 	call LoadTextBoxTilePatterns
 	call UpdateSprites
