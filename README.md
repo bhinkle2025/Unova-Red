@@ -1,4 +1,6 @@
 # Pokemon Unova Red by Azure_Keys
+IPS Patch can be found [here](https://drive.google.com/drive/folders/1CZUzrrkRVsbY6r6tVflYjeWPRUbPHCIQ?usp=sharing).
+
 # Forked by devolov
 
 https://www.pokecommunity.com/showthread.php?t=413878
