@@ -2089,6 +2089,8 @@ INCLUDE "engine/menu/league_pc.asm"
 
 INCLUDE "engine/overworld/hidden_items.asm"
 
+INCLUDE "engine/steal_mon.asm"
+
 
 SECTION "bank1E",ROMX,BANK[$1E]
 

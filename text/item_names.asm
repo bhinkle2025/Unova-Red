@@ -99,3 +99,4 @@ ItemNames:
 	db "CLEANSE TAG@"
 	db "TELEPORTER@"
 	db "POKé VIAL@"
+	db "THIEF BALL@"

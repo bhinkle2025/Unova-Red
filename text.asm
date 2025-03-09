@@ -2821,6 +2821,14 @@ _ItemUseBallText08::
 	cont "someone's PC!"
 	prompt
 
+_ItemUseBallText09::
+	text "The trainer does"
+	line "not want to"
+	cont "continue since"
+	cont "you stole"
+	cont "their #mon."
+	prompt
+
 _ItemUseBallText06::
 	text "New #DEX data"
 	line "will be added for"
@@ -3006,6 +3014,11 @@ _ThrowBallAtTrainerMonText1::
 
 _ThrowBallAtTrainerMonText2::
 	text "Don't be a thief!"
+	prompt
+
+_ThrowBallAtTrainerMonText3::
+	text "Thief ball does"
+	line "not work here!"
 	prompt
 
 _NoCyclingAllowedHereText::

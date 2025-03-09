@@ -7,6 +7,8 @@ _AddPartyMon:
 	ld a, [wMonDataLocation]
 	and $f
 	jr z, .next
+	callba CheckStolen
+	ret c
 	ld de, wEnemyPartyCount
 .next
 	ld a, [de]

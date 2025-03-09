@@ -2951,9 +2951,16 @@ BattleAnimCopyTileMapToVRAM:
 	jp Delay3
 
 TossBallAnimation:
+	ld a,[wcf91]
+	cp a,THIEF_BALL
+	jr nz,.trainerCheck
+	callba IsPokeVialAllowed
+	jr c, .skipTrainerCheck
+.trainerCheck
 	ld a,[wIsInBattle]
 	cp a,2
 	jr z,.BlockBall ; if in trainer battle, play different animation
+.skipTrainerCheck
 	ld a,[wPokeBallAnimData]
 	ld b,a
 

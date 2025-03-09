@@ -102,6 +102,7 @@ SAFARI_ROCK           EQU $16 ; overload
 	const CLEANSE_TAG   ; $62
 	const TELEPORTER    ; $63
 	const POKE_VIAL     ; $64
+	const THIEF_BALL    ; $65
 
 const_value = $C4
 
