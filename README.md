@@ -21,6 +21,7 @@ https://www.pokecommunity.com/showthread.php?t=413878
   * Razor Wind and Skull Bash boost stats
   * Poison moves buffed
   * Added PokeVial and portable Teleporter
+  * Added Thief Balls which allow stealing non-Indigo Plateau/Gym enemy Pokemon. If used on Rival, then Rival's future battles will not include the stolen mon.
   * Press Select opens bicycle
   * Faster text scrolling
   * Safari Zone has 750 steps
