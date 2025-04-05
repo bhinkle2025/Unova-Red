@@ -1,4 +1,10 @@
-PYTHON := python
+ifneq ($(wildcard rgbds/.*),)
+RGBDS_DIR = rgbds/
+else
+RGBDS_DIR =
+endif
+
+PYTHON := python3
 MD5 := md5sum -c --quiet
 
 2bpp     := $(PYTHON) -m extras.pokemontools.gfx 2bpp
@@ -34,18 +40,18 @@ clean:
 
 %_red.o: dep = $(shell $(includes) $(@D)/$*.asm)
 $(pokered_obj): %_red.o: %.asm $$(dep)
-	rgbasm -D _RED -h -o $@ $*.asm
+	$(RGBDS_DIR)rgbasm -D _RED -h -o $@ $*.asm
 
 %_blue.o: dep = $(shell $(includes) $(@D)/$*.asm)
 $(pokeblue_obj): %_blue.o: %.asm $$(dep)
-	rgbasm -D _BLUE -h -o $@ $*.asm
+	$(RGBDS_DIR)rgbasm -D _BLUE -h -o $@ $*.asm
 
 pokered_opt  = -jsv -k 01 -l 0x33 -m 0x13 -p 0 -r 03 -t "POKEMON RED"
 pokeblue_opt = -jsv -k 01 -l 0x33 -m 0x13 -p 0 -r 03 -t "POKEMON BLUE"
 
 %.gbc: $$(%_obj)
-	rgblink -m $*.map -n $*.sym -o $@ $^
-	rgbfix $($*_opt) $@
+	$(RGBDS_DIR)rgblink -m $*.map -n $*.sym -o $@ $^
+	$(RGBDS_DIR)rgbfix $($*_opt) $@
 
 %.png:  ;
 %.2bpp: %.png  ; @$(2bpp) $<
