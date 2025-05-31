@@ -2656,6 +2656,11 @@ _NothingToSort::
 	next "to sort."
 	prompt
 
+_TrainerRebattleText::
+	text "Would you like to"
+	next "rebattle me?"
+	done
+
 SECTION "Text 10", ROMX, BANK[TEXT_10]
 
 _CableClubNPCPleaseComeAgainText::

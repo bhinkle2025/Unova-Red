@@ -254,16 +254,6 @@ DrawHPBar::
 LoadMonData::
 	jpab LoadMonData_
 
-OverwritewMoves::
-; Write c to [wMoves + b]. Unused.
-	ld hl, wMoves
-	ld e, b
-	ld d, 0
-	add hl, de
-	ld a, c
-	ld [hl], a
-	ret
-
 LoadFlippedFrontSpriteByMonIndex::
 	ld a, 1
 	ld [wSpriteFlipped], a
@@ -2287,6 +2277,16 @@ TalkToTrainer::
 	ld a, c
 	and a
 	jr z, .trainerNotYetFought     ; test trainer's flag
+	ld a, [hJoyHeld]
+	bit BIT_B_BUTTON, a
+	jr z, .trainerFought
+	ld hl, TrainerRebattleText
+	call PrintText
+	call YesNoChoice
+	ld a, [wCurrentMenuItem]
+	and a
+	jp z, .trainerNotYetFought
+.trainerFought
 	ld a, $6
 	call ReadTrainerHeaderInfo     ; print after battle text
 	jp PrintText
@@ -2311,6 +2311,10 @@ TalkToTrainer::
 	ld hl, wCurMapScript
 	inc [hl]      ; increment map script index before StartTrainerBattle increments it again (next script function is usually EndTrainerBattle)
 	jp StartTrainerBattle
+
+TrainerRebattleText::
+	TX_FAR _TrainerRebattleText
+	db "@"
 
 ; checks if any trainers are seeing the player and wanting to fight
 CheckFightingMapTrainers::
@@ -2566,17 +2570,6 @@ TrainerEndBattleText::
 	call GetSavedEndBattleTextPointer
 	call TextCommandProcessor
 	jp TextScriptEnd
-
-; only engage withe trainer if the player is not already
-; engaged with another trainer
-; XXX unused?
-CheckIfAlreadyEngaged::
-	ld a, [wFlags_0xcd60]
-	bit 0, a
-	ret nz
-	call EngageMapTrainer
-	xor a
-	ret
 
 PlayTrainerMusic::
 	ld a, [wEngagedTrainerClass]
@@ -3315,10 +3308,6 @@ GetName::
 	ld bc,$0014
 	call CopyData
 .gotPtr
-	ld a,e
-	ld [wUnusedCF8D],a
-	ld a,d
-	ld [wUnusedCF8D + 1],a
 	pop de
 	pop bc
 	pop hl
