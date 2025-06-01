@@ -317,6 +317,7 @@ H_WHOSETURN EQU $FFF3 ; 0 on player’s turn, 1 on enemy’s turn
 ; bit 1: menu is double spaced
 hFlags_0xFFF6 EQU $FFF6
 
+hSelectHoldTimer EQU $FFF7
 hFieldMoveMonMenuTopMenuItemX EQU $FFF7
 
 hDisableJoypadPolling EQU $FFF9

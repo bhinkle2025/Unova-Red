@@ -1501,6 +1501,7 @@ wFontLoaded:: ; cfc4
 ; bit 0: The space in VRAM that is used to store walk animation tile patterns
 ;        for the player and NPCs is in use for font tile patterns.
 ;        This means that NPC movement must be disabled.
+; bit 1: A/B Turbo
 ; The other bits are unused.
 	ds 1
 

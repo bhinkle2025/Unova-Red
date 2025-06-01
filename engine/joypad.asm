@@ -6,6 +6,29 @@ _Joypad::
 	cp A_BUTTON + B_BUTTON + SELECT + START ; soft reset
 	jp z, TrySoftReset
 
+	; --- Turbo A/B ---
+	ld b, a
+	ld a, [wFontLoaded]
+	bit 1, a
+	jr z, .noTurbo
+
+	ld a, [rDIV]
+	bit 4, a
+	jr z, .noTurbo
+
+	ld a, b
+	bit BIT_A_BUTTON, a
+	jr z, .checkBTurbo
+	xor A_BUTTON
+.checkBTurbo:
+	bit BIT_B_BUTTON, a
+	jr z, .doneTurbo
+	xor B_BUTTON
+	jr .doneTurbo
+.noTurbo:
+	ld a, b
+.doneTurbo:
+
 	ld b, a
 	ld a, [hJoyLast]
 	ld e, a

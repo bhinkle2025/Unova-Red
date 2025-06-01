@@ -68,15 +68,27 @@ OverworldLoopLessDelay::
 	bit 7,a ; are we simulating button presses?
 	jr z,.notSimulating
 	ld a,[hJoyHeld]
-	jr .checkIfSelectIsPressed
+	jr .checkIfStartIsPressed
 .notSimulating
-	ld a,[hJoyPressed]
-.checkIfSelectIsPressed
-	bit 2,a ; select button
-	jr z,.selectButtonNotPressed
-; if SELECT is pressed
+	ld a, [hJoyHeld]
+	bit 2, a
+	jr z, .resetSelectTimer
+	ld a, [hSelectHoldTimer]
+	cp 15  ; held for ~500ms
+	jr c, .incTimer
+	jr nz, .bikeShortcutDone
 	callba TryRideBike
-.selectButtonNotPressed
+	jr .bikeShortcutDone
+.incTimer
+	inc a
+	ld [hSelectHoldTimer], a
+	jr .bikeShortcutDone
+.resetSelectTimer
+	xor a
+	ld [hSelectHoldTimer], a
+.bikeShortcutDone
+	ld a,[hJoyPressed]
+.checkIfStartIsPressed
 	bit 3,a ; start button
 	jr z,.startButtonNotPressed
 ; if START is pressed
@@ -527,8 +539,6 @@ WarpFound2::
 ; this is for handling "outside" maps that can't have the 0xFF destination map
 	ld a,[wCurMap]
 	ld [wLastMap],a
-	ld a,[wCurMapWidth]
-	ld [wUnusedD366],a ; not read
 	ld a,[hWarpDestinationMap]
 	ld [wCurMap],a
 	cp ROCK_TUNNEL_1
@@ -2044,8 +2054,6 @@ LoadPlayerSpriteGraphicsCommon::
 ; function to load data from the map header
 LoadMapHeader::
 	callba MarkTownVisitedAndLoadMissableObjects
-	ld a,[wCurMapTileset]
-	ld [wUnusedD119],a
 	ld a,[wCurMap]
 	call SwitchToMapRomBank
 	ld a,[wCurMapTileset]
@@ -2343,7 +2351,6 @@ LoadMapData::
 	ld [hSCY],a
 	ld [hSCX],a
 	ld [wWalkCounter],a
-	ld [wUnusedD119],a
 	ld [wWalkBikeSurfStateCopy],a
 	ld [wSpriteSetID],a
 	call LoadTextBoxTilePatterns

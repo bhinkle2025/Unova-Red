@@ -36,4 +36,17 @@ Joypad::
 ; [hJoyPressed]   keys pressed since last time
 ; [hJoyHeld] currently pressed keys
 	homecall _Joypad
+	ld a, [hSelectHoldTimer]
+	cp 15  ; Used by the hSelectHoldTimer for bike shortcut
+	ret nc
+	ld a, [hJoyReleased]
+	bit BIT_SELECT, a
+	ret z
+	ld hl, wFontLoaded
+	bit 1, [hl]
+	jr z, .setTurbo
+	res 1, [hl]
+	ret
+.setTurbo
+	set 1, [hl]
 	ret
