@@ -5,7 +5,7 @@ db 85 ; base defense
 db 116 ; base speed
 db 76 ; base special
 db GRASS ; species type 1
-db GRASS ; species type 2
+db FAIRY ; species type 2
 db 75 ; catch rate
 db 168 ; base exp yield
 INCBIN "pic/bmon/whimsicott.pic",0,1 ; 77, sprite dimensions

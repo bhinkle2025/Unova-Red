@@ -5,7 +5,7 @@ db 86 ; base defense
 db 50 ; base speed
 db 73 ; base special
 db NORMAL ; species type 1
-db NORMAL ; species type 2
+db FAIRY ; species type 2
 db 255 ; catch rate
 db 255 ; base exp yield
 INCBIN "pic/bmon/audino.pic",0,1 ; 77, sprite dimensions
