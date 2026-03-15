@@ -1,4 +1,4 @@
-ifneq ($(wildcard rgbds/.*),)
+ifneq ($(wildcard rgbds/rgbasm),)
 RGBDS_DIR = rgbds/
 else
 RGBDS_DIR =
@@ -40,11 +40,11 @@ clean:
 
 %_red.o: dep = $(shell $(includes) $(@D)/$*.asm)
 $(unovared_obj): %_red.o: %.asm $$(dep)
-	$(RGBDS_DIR)rgbasm -D _RED -h -o $@ $*.asm
+	$(RGBDS_DIR)rgbasm -D _RED -o $@ $*.asm
 
 %_blue.o: dep = $(shell $(includes) $(@D)/$*.asm)
 $(unovablue_obj): %_blue.o: %.asm $$(dep)
-	$(RGBDS_DIR)rgbasm -D _BLUE -h -o $@ $*.asm
+	$(RGBDS_DIR)rgbasm -D _BLUE -o $@ $*.asm
 
 unovared_opt  = -jsv -k 01 -l 0x33 -m 0x13 -p 0 -r 03 -t "POKEMON RED"
 unovablue_opt = -jsv -k 01 -l 0x33 -m 0x13 -p 0 -r 03 -t "POKEMON BLUE"
