@@ -76,7 +76,7 @@ MoveEnd:
         move HYPER_BEAM,   HYPER_BEAM_EFFECT,          150, NORMAL,    90,  5
         move PECK,         NO_ADDITIONAL_EFFECT,        35, FLYING,   100, 35
         move DRILL_PECK,   NO_ADDITIONAL_EFFECT,        80, FLYING,   100, 20
-        move SUBMISSION,   RECOIL_EFFECT,               80, FIGHTING,  80, 25
+        move SUBMISSION,   RECOIL_EFFECT,              120, FIGHTING,  90, 10
         move LOW_KICK,     FLINCH_SIDE_EFFECT2,         50, FIGHTING, 100, 20
         move COUNTER,      NO_ADDITIONAL_EFFECT,         1, FIGHTING, 100, 20
         move SEISMIC_TOSS, SPECIAL_DAMAGE_EFFECT,        1, FIGHTING, 100, 20
@@ -86,7 +86,7 @@ MoveEnd:
         move LEECH_SEED,   LEECH_SEED_EFFECT,            0, GRASS,     90, 10
         move GROWTH,       SPECIAL_UP1_EFFECT,           0, NORMAL,   100, 40
         move RAZOR_LEAF,   NO_ADDITIONAL_EFFECT,        55, GRASS,     95, 25
-        move SOLARBEAM,    CHARGE_EFFECT,              120, GRASS,    100, 10
+        move SOLARBEAM,    CHARGE_EFFECT,              200, GRASS,    100, 10
         move POISONPOWDER, POISON_EFFECT,                0, POISON,    75, 35
         move STUN_SPORE,   PARALYZE_EFFECT,              0, GRASS,     75, 30
         move SLEEP_POWDER, SLEEP_EFFECT,                 0, GRASS,     75, 15
@@ -153,7 +153,7 @@ MoveEnd:
         move BUG_BITE,     NO_ADDITIONAL_EFFECT,        60, BUG,      100, 20
         move LEECH_LIFE,   DRAIN_HP_EFFECT,             20, BUG,      100, 15
         move HURRICANE,    CONFUSION_SIDE_EFFECT,      120, FLYING,    70, 10
-        move SKY_ATTACK,   CHARGE_EFFECT,              140, FLYING,    90,  5
+        move SKY_ATTACK,   CHARGE_EFFECT,              200, FLYING,    90,  5
         move SACRED_SWORD, NO_ADDITIONAL_EFFECT,       120, FIGHTING, 100, 15
         move BUBBLE,       SPEED_DOWN_SIDE_EFFECT,      20, WATER,    100, 30
         move DIZZY_PUNCH,  CONFUSION_SIDE_EFFECT,       70, NORMAL,   100, 10
