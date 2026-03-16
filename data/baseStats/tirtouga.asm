@@ -3,7 +3,7 @@ db 54 ; base hp
 db 78 ; base attack
 db 103 ; base defense
 db 22 ; base speed
-db 49 ; base special
+db 53 ; base special
 db ROCK ; species type 1
 db WATER ; species type 2
 db 45 ; catch rate

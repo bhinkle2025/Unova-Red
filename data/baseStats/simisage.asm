@@ -3,7 +3,7 @@ db 75 ; base hp
 db 98 ; base attack
 db 63 ; base defense
 db 101 ; base speed
-db 81 ; base special
+db 98 ; base special
 db GRASS ; species type 1
 db GRASS ; species type 2
 db 75 ; catch rate

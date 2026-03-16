@@ -1,9 +1,9 @@
 db DEX_SAMUROTT ; pokedex id
-db 95 ; base hp
+db 90 ; base hp
 db 100 ; base attack
-db 85 ; base defense
+db 80 ; base defense
 db 70 ; base speed
-db 89 ; base special
+db 85 ; base special
 db WATER ; species type 1
 db WATER ; species type 2
 db 45 ; catch rate

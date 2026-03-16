@@ -3,7 +3,7 @@ db 60 ; base hp
 db 40 ; base attack
 db 60 ; base defense
 db 55 ; base speed
-db 78 ; base special
+db 95 ; base special
 db GHOST ; species type 1
 db FIRE ; species type 2
 db 90 ; catch rate

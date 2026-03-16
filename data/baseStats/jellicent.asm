@@ -3,7 +3,7 @@ db 100 ; base hp
 db 60 ; base attack
 db 70 ; base defense
 db 60 ; base speed
-db 95 ; base special
+db 105 ; base special
 db WATER ; species type 1
 db GHOST ; species type 2
 db 60 ; catch rate

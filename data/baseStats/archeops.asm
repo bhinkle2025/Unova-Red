@@ -3,7 +3,7 @@ db 75 ; base hp
 db 140 ; base attack
 db 65 ; base defense
 db 110 ; base speed
-db 89 ; base special
+db 65 ; base special
 db ROCK ; species type 1
 db FLYING ; species type 2
 db 45 ; catch rate

@@ -3,7 +3,7 @@ db 40 ; base hp
 db 27 ; base attack
 db 60 ; base defense
 db 66 ; base speed
-db 44 ; base special
+db 50 ; base special
 db GRASS ; species type 1
 db FAIRY ; species type 2
 db 190 ; catch rate

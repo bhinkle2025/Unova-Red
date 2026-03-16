@@ -3,7 +3,7 @@ db 55 ; base hp
 db 75 ; base attack
 db 60 ; base defense
 db 103 ; base speed
-db 68 ; base special
+db 75 ; base special
 db ELECTRIC ; species type 1
 db FLYING ; species type 2
 db 200 ; catch rate

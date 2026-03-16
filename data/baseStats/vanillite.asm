@@ -3,7 +3,7 @@ db 36 ; base hp
 db 50 ; base attack
 db 50 ; base defense
 db 44 ; base speed
-db 63 ; base special
+db 65 ; base special
 db ICE ; species type 1
 db ICE ; species type 2
 db 255 ; catch rate

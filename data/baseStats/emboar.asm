@@ -1,9 +1,9 @@
 db DEX_EMBOAR ; pokedex id
 db 110 ; base hp
-db 123 ; base attack
+db 120 ; base attack
 db 65 ; base defense
 db 65 ; base speed
-db 83 ; base special
+db 65 ; base special
 db FIRE ; species type 1
 db FIGHTING ; species type 2
 db 45 ; catch rate

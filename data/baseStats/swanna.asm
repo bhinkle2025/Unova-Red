@@ -3,7 +3,7 @@ db 75 ; base hp
 db 87 ; base attack
 db 63 ; base defense
 db 98 ; base speed
-db 75 ; base special
+db 87 ; base special
 db WATER ; species type 1
 db FLYING ; species type 2
 db 45 ; catch rate

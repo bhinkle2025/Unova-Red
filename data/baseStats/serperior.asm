@@ -2,8 +2,8 @@ db DEX_SERPERIOR ; pokedex id
 db 75 ; base hp
 db 75 ; base attack
 db 95 ; base defense
-db 113 ; base speed
-db 85 ; base special
+db 105 ; base speed
+db 75 ; base special
 db GRASS ; species type 1
 db GRASS ; species type 2
 db 45 ; catch rate

@@ -3,7 +3,7 @@ db 65 ; base hp
 db 45 ; base attack
 db 43 ; base defense
 db 72 ; base speed
-db 49 ; base special
+db 55 ; base special
 db PSYCHIC ; species type 1
 db FLYING ; species type 2
 db 190 ; catch rate
