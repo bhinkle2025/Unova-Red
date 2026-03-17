@@ -12,7 +12,7 @@ INCBIN "pic/bmon/yamask.pic",0,1 ; 77, sprite dimensions
 dw YamaskPicFront
 dw YamaskPicBack
 ; attacks known at lvl 0
-db DISABLE
+db CONFUSION
 db LICK
 db 0
 db 0

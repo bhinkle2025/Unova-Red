@@ -12,7 +12,7 @@ INCBIN "pic/bmon/cofagrigus.pic",0,1 ; 77, sprite dimensions
 dw CofagrigusPicFront
 dw CofagrigusPicBack
 ; attacks known at lvl 0
-db DISABLE
+db CONFUSION
 db LICK
 db 0
 db 0

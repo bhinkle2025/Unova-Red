@@ -669,9 +669,6 @@ AnimationIdSpecialEffects:
 	db GROWL
 	dw DoGrowlSpecialEffects
 
-	db DISABLE
-	dw AnimationFlashScreen
-
 	db BLIZZARD
 	dw DoBlizzardSpecialEffects
 

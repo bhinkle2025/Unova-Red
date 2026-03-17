@@ -48,7 +48,7 @@ MoveNames::
 	db "SING@"
 	db "SUPERSONIC@"
 	db "SHADOW BALL@"
-	db "DISABLE@"
+	db "ACROBATICS@"
 	db "ACID@"
 	db "EMBER@"
 	db "FLAMETHROWER@"

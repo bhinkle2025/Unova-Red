@@ -48,7 +48,7 @@ AttackAnimationPointers:
 	dw SingAnim
 	dw SupersonicAnim
 	dw ShadowBallAnim
-	dw DisableAnim
+	dw AcrobaticsAnim
 	dw AcidAnim
 	dw EmberAnim
 	dw FlamethrowerAnim
@@ -292,6 +292,7 @@ GustAnim:
 	db $06,$FF,$02
 	db $FF
 
+AcrobaticsAnim:
 WingAttackAnim:
 	db $46,$10,$04
 	db $FF
@@ -463,13 +464,6 @@ ShadowBallAnim:
 	db SE_DARK_SCREEN_PALETTE, $48
 	db $43,$3B,$41
 	db $05,$FF,$55
-	db SE_RESET_SCREEN_PALETTE, $FF
-	db $FF
-
-DisableAnim:
-	db SE_DARK_SCREEN_PALETTE, $48
-	db SE_DARK_SCREEN_FLASH, $2A
-	db SE_DARK_SCREEN_FLASH, $2A
 	db SE_RESET_SCREEN_PALETTE, $FF
 	db $FF
 

@@ -49,7 +49,7 @@ const_value = 1
 	const SING         ; 2f
 	const SUPERSONIC   ; 30
 	const SHADOW_BALL  ; 31
-	const DISABLE      ; 32
+	const ACROBATICS   ; 32
 	const ACID         ; 33
 	const EMBER        ; 34
 	const FLAMETHROWER ; 35
