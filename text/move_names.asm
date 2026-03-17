@@ -99,7 +99,7 @@ MoveNames::
 	db "QUICK ATTACK@"
 	db "RAGE@"
 	db "TELEPORT@"
-	db "NIGHT SHADE@"
+	db "SHADOW PUNCH@"
 	db "MIMIC@"
 	db "SCREECH@"
 	db "DOUBLE TEAM@"

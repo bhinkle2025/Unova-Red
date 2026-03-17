@@ -100,7 +100,7 @@ const_value = 1
 	const QUICK_ATTACK ; 62
 	const RAGE         ; 63
 	const TELEPORT     ; 64
-	const NIGHT_SHADE  ; 65
+	const SHADOW_PUNCH ; 65
 	const MIMIC        ; 66
 	const SCREECH      ; 67
 	const DOUBLE_TEAM  ; 68

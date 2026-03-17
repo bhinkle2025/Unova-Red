@@ -2410,7 +2410,7 @@ MoveSoundTable:
 	db SFX_BATTLE_35,         $00,$80 ; SING
 	db SFX_BATTLE_27,         $40,$60 ; SUPERSONIC
 	db SFX_BATTLE_27,         $00,$80 ; SONICBOOM
-	db SFX_BATTLE_27,         $ff,$40 ; DISABLE
+	db SFX_BATTLE_12,         $10,$a0 ; ACROBATICS
 	db SFX_BATTLE_2A,         $80,$c0 ; ACID
 	db SFX_BATTLE_19,         $10,$a0 ; EMBER
 	db SFX_BATTLE_19,         $21,$e0 ; FLAMETHROWER
@@ -2461,7 +2461,7 @@ MoveSoundTable:
 	db SFX_BATTLE_25,         $00,$10 ; QUICK_ATTACK
 	db SFX_BATTLE_26,         $f0,$20 ; RAGE
 	db SFX_BATTLE_33,         $f0,$c0 ; TELEPORT
-	db SFX_NOT_VERY_EFFECTIVE,$f0,$e0 ; NIGHT_SHADE
+	db SFX_BATTLE_0D,         $00,$40 ; SHADOW_PUNCH
 	db SFX_BATTLE_09,         $f0,$40 ; MIMIC
 	db SFX_BATTLE_31,         $00,$80 ; SCREECH
 	db SFX_BATTLE_33,         $80,$40 ; DOUBLE_TEAM

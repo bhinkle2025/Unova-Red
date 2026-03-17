@@ -36,7 +36,7 @@ MoveEnd:
         move STOMP,        FLINCH_SIDE_EFFECT2,         65, NORMAL,   100, 20
         move DOUBLE_KICK,  ATTACK_TWICE_EFFECT,         30, FIGHTING, 100, 30
         move MEGA_KICK,    NO_ADDITIONAL_EFFECT,       120, NORMAL,    75,  5
-        move JUMP_KICK,    JUMP_KICK_EFFECT,            70, FIGHTING,  95, 25
+        move JUMP_KICK,    JUMP_KICK_EFFECT,           100, FIGHTING,  95, 10
         move STORM_THROW,  NO_ADDITIONAL_EFFECT,        90, FIGHTING, 100, 10
         move SAND_ATTACK,  ACCURACY_DOWN1_EFFECT,        0, GROUND,   100, 15
         move HEADBUTT,     FLINCH_SIDE_EFFECT2,         70, NORMAL,   100, 15
@@ -111,7 +111,7 @@ MoveEnd:
         move QUICK_ATTACK, NO_ADDITIONAL_EFFECT,        40, NORMAL,   100, 30
         move RAGE,         RAGE_EFFECT,                 20, NORMAL,   100, 20
         move TELEPORT,     SWITCH_AND_TELEPORT_EFFECT,   0, PSYCHIC,  100, 20
-        move NIGHT_SHADE,  SPECIAL_DAMAGE_EFFECT,        0, GHOST,    100, 15
+        move SHADOW_PUNCH, SWIFT_EFFECT,                75, GHOST,    100, 20
         move MIMIC,        MIMIC_EFFECT,                 0, NORMAL,   100, 10
         move SCREECH,      DEFENSE_DOWN2_EFFECT,         0, NORMAL,    85, 40
         move DOUBLE_TEAM,  EVASION_UP1_EFFECT,           0, NORMAL,   100, 15
@@ -146,7 +146,7 @@ MoveEnd:
         move AMNESIA,      SPECIAL_UP2_EFFECT,           0, PSYCHIC,  100, 20
         move CRUNCH,       DEFENSE_DOWN_SIDE_EFFECT,    80, DARK,     100, 15
         move FAINT_ATTACK, SWIFT_EFFECT,                60, DARK,     100, 20
-        move HI_JUMP_KICK, JUMP_KICK_EFFECT,           100, FIGHTING,  90, 10
+        move HI_JUMP_KICK, JUMP_KICK_EFFECT,           130, FIGHTING,  90, 10
         move GLARE,        PARALYZE_EFFECT,              0, NORMAL,   100, 30
         move DREAM_EATER,  DREAM_EATER_EFFECT,         100, PSYCHIC,  100, 15
         move POISON_GAS,   POISON_EFFECT,                0, POISON,    55, 40

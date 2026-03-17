@@ -4921,8 +4921,6 @@ ApplyAttackToEnemyPokemon:
 	ld a,[wPlayerMoveNum]
 	cp a,SEISMIC_TOSS
 	jr z,.storeDamage
-	cp a,NIGHT_SHADE
-	jr z,.storeDamage
 	ld b,DRAGON_RAGE_DAMAGE ; 40
 	cp a,DRAGON_RAGE
 	jr z,.storeDamage
@@ -5036,8 +5034,6 @@ ApplyAttackToPlayerPokemon:
 	ld b,a
 	ld a,[wEnemyMoveNum]
 	cp a,SEISMIC_TOSS
-	jr z,.storeDamage
-	cp a,NIGHT_SHADE
 	jr z,.storeDamage
 	ld b,DRAGON_RAGE_DAMAGE
 	cp a,DRAGON_RAGE
