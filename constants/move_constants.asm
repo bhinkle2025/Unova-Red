@@ -45,7 +45,7 @@ const_value = 1
 	const LEER         ; 2b
 	const BITE         ; 2c
 	const GROWL        ; 2d
-	const ROAR         ; 2e
+	const MOONBLAST    ; 2e
 	const SING         ; 2f
 	const SUPERSONIC   ; 30
 	const SHADOW_BALL  ; 31

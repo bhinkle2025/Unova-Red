@@ -25,7 +25,7 @@ MoveEnd:
         move GUILLOTINE,   OHKO_EFFECT,                  1, NORMAL,    30,  5
         move RAZOR_WIND,   CHARGE_EFFECT,              120, FLYING,   100, 10
         move SWORDS_DANCE, ATTACK_UP2_EFFECT,            0, NORMAL,   100, 30
-        move CUT,          NO_ADDITIONAL_EFFECT,        50, NORMAL,    95, 30
+        move CUT,          NO_ADDITIONAL_EFFECT,        80, BUG,      100, 15
         move GUST,         NO_ADDITIONAL_EFFECT,        40, FLYING,   100, 35
         move WING_ATTACK,  NO_ADDITIONAL_EFFECT,        60, FLYING,   100, 25
         move WHIRLWIND,    SWITCH_AND_TELEPORT_EFFECT,   0, NORMAL,   100, 20
@@ -56,7 +56,7 @@ MoveEnd:
         move LEER,         DEFENSE_DOWN1_EFFECT,         0, NORMAL,   100, 30
         move BITE,         FLINCH_SIDE_EFFECT1,         60, DARK,     100, 25
         move GROWL,        ATTACK_DOWN1_EFFECT,          0, NORMAL,   100, 40
-        move ROAR,         SWITCH_AND_TELEPORT_EFFECT,   0, NORMAL,   100, 20
+        move MOONBLAST,    SPECIAL_DOWN_SIDE_EFFECT,    95, FAIRY,    100, 15
         move SING,         SLEEP_EFFECT,                 0, NORMAL,    55, 15
         move SUPERSONIC,   CONFUSION_EFFECT,             0, NORMAL,    55, 20
         move SHADOW_BALL,  SPECIAL_DOWN_SIDE_EFFECT,    80, GHOST,    100, 15
@@ -151,14 +151,14 @@ MoveEnd:
         move DREAM_EATER,  DREAM_EATER_EFFECT,         100, PSYCHIC,  100, 15
         move POISON_GAS,   POISON_EFFECT,                0, POISON,    55, 40
         move BUG_BITE,     NO_ADDITIONAL_EFFECT,        60, BUG,      100, 20
-        move LEECH_LIFE,   DRAIN_HP_EFFECT,             20, BUG,      100, 15
+        move LEECH_LIFE,   DRAIN_HP_EFFECT,             80, BUG,      100, 10
         move HURRICANE,    CONFUSION_SIDE_EFFECT,      120, FLYING,    70, 10
         move SKY_ATTACK,   CHARGE_EFFECT,              200, FLYING,    90,  5
         move SACRED_SWORD, NO_ADDITIONAL_EFFECT,       120, FIGHTING, 100, 15
         move BUBBLE,       SPEED_DOWN_SIDE_EFFECT,      20, WATER,    100, 30
         move DIZZY_PUNCH,  CONFUSION_SIDE_EFFECT,       70, NORMAL,   100, 10
         move SPORE,        SLEEP_EFFECT,                 0, GRASS,    100, 15
-        move FLASH,        ACCURACY_DOWN1_EFFECT,        0, NORMAL,   100, 20
+        move FLASH,        NO_ADDITIONAL_EFFECT,        80, STEEL,    100, 10
         move PSYWAVE,      SPECIAL_DAMAGE_EFFECT,        1, PSYCHIC,   80, 15
         move NIGHT_SLASH,  NO_ADDITIONAL_EFFECT,        70, DARK,     100, 15
         move ACID_ARMOR,   DEFENSE_UP2_EFFECT,           0, POISON,   100, 40

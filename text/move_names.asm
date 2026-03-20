@@ -44,7 +44,7 @@ MoveNames::
 	db "LEER@"
 	db "BITE@"
 	db "GROWL@"
-	db "ROAR@"
+	db "MOONBLAST@"
 	db "SING@"
 	db "SUPERSONIC@"
 	db "SHADOW BALL@"

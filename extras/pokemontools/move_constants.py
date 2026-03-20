@@ -46,7 +46,7 @@ moves = {
 0x2B: "LEER",
 0x2C: "BITE",
 0x2D: "GROWL",
-0x2E: "ROAR",
+0x2E: "MOONBLAST",
 0x2F: "SING",
 0x30: "SUPERSONIC",
 0x31: "SONICBOOM",

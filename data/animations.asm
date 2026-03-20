@@ -44,7 +44,7 @@ AttackAnimationPointers:
 	dw LeerAnim
 	dw BiteAnim
 	dw GrowlAnim
-	dw RoarAnim
+	dw MoonblastAnim
 	dw SingAnim
 	dw SupersonicAnim
 	dw ShadowBallAnim
@@ -99,7 +99,7 @@ AttackAnimationPointers:
 	dw QuickAttackAnim
 	dw RageAnim
 	dw TeleportAnim
-	dw NightShadeAnim
+	dw ShadowPunchAnim
 	dw MimicAnim
 	dw ScreechAnim
 	dw DoubleTeamAnim
@@ -232,6 +232,7 @@ CometPunchAnim:
 	db $04,$03,$02
 	db $FF
 
+ShadowPunchAnim:
 MegaPunchAnim:
 	db $46,$04,$04
 	db $FF
@@ -444,12 +445,6 @@ GrowlAnim:
 	db $46,$2C,$12
 	db $FF
 
-RoarAnim:
-	db $46,$2D,$15
-	db $46,$2D,$15
-	db $46,$2D,$15
-	db $FF
-
 SingAnim:
 	db $46,$2E,$12
 	db $50,$FF,$40
@@ -512,6 +507,7 @@ BlizzardAnim:
 	db $04,$37,$38
 	db $FF
 
+MoonblastAnim:
 PsyBeamAnim:
 	db $03,$3B,$2E
 	db SE_FLASH_SCREEN_LONG, $FF
@@ -744,11 +740,6 @@ RageAnim:
 TeleportAnim:
 	db SE_SQUISH_MON_PIC, $63
 	db SE_SHOOT_BALLS_UPWARD, $FF
-	db $FF
-
-NightShadeAnim:
-	db SE_FLASH_SCREEN_LONG, $5C
-	db SE_WAVY_SCREEN, $FF
 	db $FF
 
 MimicAnim:

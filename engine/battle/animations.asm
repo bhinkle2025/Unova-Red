@@ -2351,8 +2351,6 @@ IsCryMove:
 	ld a,[wAnimationID]
 	cp a,GROWL
 	jr z,.CryMove
-	cp a,ROAR
-	jr z,.CryMove
 	and a ; clear carry
 	ret
 .CryMove
@@ -2406,7 +2404,7 @@ MoveSoundTable:
 	db SFX_BATTLE_31,         $ff,$40 ; LEER
 	db SFX_BATTLE_1E,         $00,$80 ; BITE
 	db SFX_BATTLE_0B,         $00,$c0 ; GROWL
-	db SFX_BATTLE_0B,         $00,$40 ; ROAR
+	db SFX_BATTLE_36,         $00,$80 ; MOONBLAST
 	db SFX_BATTLE_35,         $00,$80 ; SING
 	db SFX_BATTLE_27,         $40,$60 ; SUPERSONIC
 	db SFX_BATTLE_27,         $00,$80 ; SONICBOOM
