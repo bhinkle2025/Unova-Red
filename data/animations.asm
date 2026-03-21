@@ -66,7 +66,7 @@ AttackAnimationPointers:
 	dw DrillPeckAnim
 	dw SubmissionAnim
 	dw LowKickAnim
-	dw CounterAnim
+	dw PlayRoughAnim
 	dw SeismicTossAnim
 	dw StrengthAnim
 	dw AbsorbAnim
@@ -372,6 +372,7 @@ TackleAnim:
 	db SE_RESET_MON_POSITION, $FF
 	db $FF
 
+PlayRoughAnim:
 BodySlamAnim:
 	db SE_MOVE_MON_HORIZONTALLY, $48
 	db SE_DARK_SCREEN_FLASH, $FF
@@ -546,12 +547,6 @@ SubmissionAnim:
 
 LowKickAnim:
 	db SE_SLIDE_MON_OFF, $42
-	db $46,$FF,$04
-	db SE_SHOW_MON_PIC, $FF
-	db $FF
-
-CounterAnim:
-	db SE_SLIDE_MON_OFF, $43
 	db $46,$FF,$04
 	db SE_SHOW_MON_PIC, $FF
 	db $FF

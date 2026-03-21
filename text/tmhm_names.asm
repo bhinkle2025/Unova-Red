@@ -22,7 +22,7 @@ tmhmNames::
 	db "TM15-HYPBEAM@"
 	db "TM16-SLUDGE@"
 	db "TM17-SUBMSSN@"
-	db "TM18-COUNTER@"
+	db "TM18-PLAYRGH@"
 	db "TM19-SMCTOSS@"
 	db "TM20-RAGE@"
 	db "TM21-GGDRAIN@"

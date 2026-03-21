@@ -460,17 +460,6 @@ MainInBattleLoop:
 	ld a, [wEnemySelectedMove]
 	cp QUICK_ATTACK
 	jr z, .enemyMovesFirst ; if enemy used Quick Attack and player didn't
-	ld a, [wPlayerSelectedMove]
-	cp COUNTER
-	jr nz, .playerDidNotUseCounter
-	ld a, [wEnemySelectedMove]
-	cp COUNTER
-	jr z, .compareSpeed ; if both used Counter
-	jr .enemyMovesFirst ; if player used Counter and enemy didn't
-.playerDidNotUseCounter
-	ld a, [wEnemySelectedMove]
-	cp COUNTER
-	jr z, .playerMovesFirst ; if enemy used Counter and player didn't
 .compareSpeed
 	ld de, wBattleMonSpeed ; player speed value
 	ld hl, wEnemyMonSpeed ; enemy speed value
@@ -3211,7 +3200,6 @@ PlayerCalcMoveDamage:
 	call IsInArray
 	jp c,.moveHitTest ; SetDamageEffects moves (e.g. Seismic Toss and Super Fang) skip damage calculation
 	call CriticalHitTest
-	call HandleCounterMove
 	jr z,handleIfPlayerMoveMissed
 	call GetDamageVarsForPlayerAttack
 	call CalculateDamage
@@ -3926,7 +3914,7 @@ ExclamationPointMoveSets:
 	db MEDITATE, AGILITY, TELEPORT, MIMIC, DOUBLE_TEAM
 	db $00
 	db POUND, SCRATCH, VICEGRIP, WING_ATTACK, FLY, BIND, HORN_ATTACK, BODY_SLAM
-	db WRAP, THRASH, TAIL_WHIP, LEER, BITE, GROWL, SING, PECK, COUNTER
+	db WRAP, THRASH, TAIL_WHIP, LEER, BITE, GROWL, SING, PECK
 	db STRENGTH, ABSORB, STRING_SHOT, EARTHQUAKE, FISSURE, DIG, TOXIC, SCREECH, HARDEN
 	db MINIMIZE, WITHDRAW, DEFENSE_CURL, METRONOME, LICK, POISON_GAS
 	db LEECH_LIFE, BUBBLE, FLASH, ACID_ARMOR, FURY_SWIPES, REST, SHARPEN, SLASH, SUBSTITUTE
@@ -4816,73 +4804,6 @@ HighCriticalMoves:
 	db SACRED_SWORD
 	db SLASH
 	db $FF
-
-
-; function to determine if Counter hits and if so, how much damage it does
-HandleCounterMove:
-; The variables checked by Counter are updated whenever the cursor points to a new move in the battle selection menu.
-; This is irrelevant for the opponent's side outside of link battles, since the move selection is controlled by the AI.
-; However, in the scenario where the player switches out and the opponent uses Counter,
-; the outcome may be affected by the player's actions in the move selection menu prior to switching the Pokemon.
-; This might also lead to desync glitches in link battles.
-
-	ld a,[H_WHOSETURN] ; whose turn
-	and a
-; player's turn
-	ld hl,wEnemySelectedMove
-	ld de,wEnemyMovePower
-	ld a,[wPlayerSelectedMove]
-	jr z,.next
-; enemy's turn
-	ld hl,wPlayerSelectedMove
-	ld de,wPlayerMovePower
-	ld a,[wEnemySelectedMove]
-.next
-	cp a,COUNTER
-	ret nz ; return if not using Counter
-	ld a,$01
-	ld [wMoveMissed],a ; initialize the move missed variable to true (it is set to false below if the move hits)
-	ld a,[hl]
-	cp a,COUNTER
-	ret z ; miss if the opponent's last selected move is Counter.
-	ld a,[de]
-	and a
-	ret z ; miss if the opponent's last selected move's Base Power is 0.
-; check if the move the target last selected was Normal or Fighting type
-	inc de
-	ld a,[de]
-	and a ; normal type
-	jr z,.counterableType
-	cp a,FIGHTING
-	jr z,.counterableType
-; if the move wasn't Normal or Fighting type, miss
-	xor a
-	ret
-.counterableType
-	ld hl,wDamage
-	ld a,[hli]
-	or [hl]
-	ret z ; If we made it here, Counter still misses if the last move used in battle did no damage to its target.
-	      ; wDamage is shared by both players, so Counter may strike back damage dealt by the Counter user itself
-	      ; if the conditions meet, even though 99% of the times damage will come from the target.
-; if it did damage, double it
-	ld a,[hl]
-	add a
-	ldd [hl],a
-	ld a,[hl]
-	adc a
-	ld [hl],a
-	jr nc,.noCarry
-; damage is capped at 0xFFFF
-	ld a,$ff
-	ld [hli],a
-	ld [hl],a
-.noCarry
-	xor a
-	ld [wMoveMissed],a
-	call MoveHitTest ; do the normal move hit test in addition to Counter's special rules
-	xor a
-	ret
 
 ApplyAttackToEnemyPokemon:
 	ld a,[wPlayerMoveEffect]
@@ -5796,7 +5717,6 @@ EnemyCalcMoveDamage:
 	call IsInArray
 	jp c, EnemyMoveHitTest
 	call CriticalHitTest
-	call HandleCounterMove
 	jr z, handleIfEnemyMoveMissed
 	call SwapPlayerAndEnemyLevels
 	call GetDamageVarsForEnemyAttack

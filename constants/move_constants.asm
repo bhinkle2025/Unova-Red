@@ -67,7 +67,7 @@ const_value = 1
 	const DRILL_PECK   ; 41
 	const SUBMISSION   ; 42
 	const LOW_KICK     ; 43
-	const COUNTER      ; 44
+	const PLAY_ROUGH   ; 44
 	const SEISMIC_TOSS ; 45
 	const STRENGTH     ; 46
 	const ABSORB       ; 47

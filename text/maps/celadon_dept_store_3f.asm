@@ -14,10 +14,11 @@ _ReceivedTM18Text::
 	text "!@@"
 
 _TM18ExplanationText::
-	text "TM18 is COUNTER!"
-	line "Not like the one"
-	cont "I'm leaning on,"
-	cont "mind you!"
+	text "TM18 is PLAY"
+	line "ROUGH! A fierce"
+	cont "physical attack"
+	cont "that may lower"
+	cont "foe's ATTACK!"
 	done
 
 _TM18NoRoomText::

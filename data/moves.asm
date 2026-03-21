@@ -78,7 +78,7 @@ MoveEnd:
         move DRILL_PECK,   NO_ADDITIONAL_EFFECT,        80, FLYING,   100, 20
         move SUBMISSION,   RECOIL_EFFECT,              120, FIGHTING,  90, 10
         move LOW_KICK,     FLINCH_SIDE_EFFECT2,         50, FIGHTING, 100, 20
-        move COUNTER,      NO_ADDITIONAL_EFFECT,         1, FIGHTING, 100, 20
+        move PLAY_ROUGH,   ATTACK_DOWN_SIDE_EFFECT,     90, FAIRY,     90, 10
         move SEISMIC_TOSS, SPECIAL_DAMAGE_EFFECT,        1, FIGHTING, 100, 20
         move STRENGTH,     NO_ADDITIONAL_EFFECT,        80, NORMAL,   100, 15
         move ABSORB,       DRAIN_HP_EFFECT,             20, GRASS,    100, 20

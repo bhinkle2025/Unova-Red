@@ -20,7 +20,7 @@ db 3 ; growth rate
 ; learnset
 	tmlearn 1,2,3,4,5,6,8
 	tmlearn 9,10,15
-	tmlearn 17,18,19,20,21,23
+	tmlearn 17,19,20,21,23
 	tmlearn 26,27,29,30,31,32
 	tmlearn 33,34,35,37,38,39,40
 	tmlearn 41,43,44,45,46,48

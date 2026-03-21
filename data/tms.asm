@@ -16,7 +16,7 @@ TechnicalMachines:
 	db HYPER_BEAM
 	db SLUDGE
 	db SUBMISSION
-	db COUNTER
+	db PLAY_ROUGH
 	db SEISMIC_TOSS
 	db RAGE
 	db GIGA_DRAIN
