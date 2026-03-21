@@ -19,7 +19,7 @@ AttackAnimationPointers:
 	dw WhirlwindAnim
 	dw FlyAnim
 	dw BindAnim
-	dw SlamAnim
+	dw PowerWhipAnim
 	dw VineWhipAnim
 	dw StompAnim
 	dw DoubleKickAnim
@@ -313,10 +313,7 @@ BindAnim:
 	db $04,$13,$23
 	db $FF
 
-SlamAnim:
-	db $06,$14,$02
-	db $FF
-
+PowerWhipAnim:
 VineWhipAnim:
 	db $01,$15,$16
 	db $08,$FF,$01

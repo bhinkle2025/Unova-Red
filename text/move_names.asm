@@ -19,7 +19,7 @@ MoveNames::
 	db "WHIRLWIND@"
 	db "FLY@"
 	db "BIND@"
-	db "SLAM@"
+	db "POWER WHIP@"
 	db "VINE WHIP@"
 	db "STOMP@"
 	db "DOUBLE KICK@"

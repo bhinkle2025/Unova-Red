@@ -20,7 +20,7 @@ const_value = 1
 	const WHIRLWIND    ; 12
 	const FLY          ; 13
 	const BIND         ; 14
-	const SLAM         ; 15
+	const POWER_WHIP   ; 15
 	const VINE_WHIP    ; 16
 	const STOMP        ; 17
 	const DOUBLE_KICK  ; 18

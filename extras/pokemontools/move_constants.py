@@ -21,7 +21,7 @@ moves = {
 0x12: "WHIRLWIND",
 0x13: "FLY",
 0x14: "BIND",
-0x15: "SLAM",
+0x15: "POWER_WHIP",
 0x16: "VINE_WHIP",
 0x17: "STOMP",
 0x18: "DOUBLE_KICK",
