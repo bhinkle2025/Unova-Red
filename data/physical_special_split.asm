@@ -4,7 +4,6 @@ PhysicalToSpecialMoves:
 		db RAZOR_WIND
 		db HURRICANE
 ; Poison
-        db ACID
 		db SMOG
         db SLUDGE
 ; Ground
@@ -25,6 +24,7 @@ SpecialToPhysicalMoves:
 ; Grass
         db RAZOR_LEAF
         db VINE_WHIP
+        db POWER_WHIP
 ; Electric
         db THUNDERPUNCH
 ; Ice
@@ -33,4 +33,7 @@ SpecialToPhysicalMoves:
 		db DRAGON_CLAW
 ; Ghost
 		db LICK
+        db SHADOW_PUNCH
+; Fairy
+        db PLAY_ROUGH
         db -1 ; end

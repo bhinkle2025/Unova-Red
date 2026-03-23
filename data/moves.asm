@@ -61,7 +61,7 @@ MoveEnd:
         move SUPERSONIC,   CONFUSION_EFFECT,             0, NORMAL,    55, 20
         move SHADOW_BALL,  SPECIAL_DOWN_SIDE_EFFECT,    80, GHOST,    100, 15
         move ACROBATICS,   NO_ADDITIONAL_EFFECT,       100, FLYING,   100, 15
-        move ACID,         DEFENSE_DOWN_SIDE_EFFECT,    65, POISON,   100, 30
+        move ACID,         DEFENSE_DOWN_SIDE_EFFECT,    75, POISON,   100, 30
         move EMBER,        BURN_SIDE_EFFECT1,           40, FIRE,     100, 25
         move FLAMETHROWER, BURN_SIDE_EFFECT1,           95, FIRE,     100, 15
         move MIST,         MIST_EFFECT,                  0, ICE,      100, 30
