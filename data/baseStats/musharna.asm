@@ -12,7 +12,7 @@ INCBIN "pic/bmon/musharna.pic",0,1 ; 77, sprite dimensions
 dw MusharnaPicFront
 dw MusharnaPicBack
 ; attacks known at lvl 0
-db PSYWAVE
+db HYPNOSIS
 db DEFENSE_CURL
 db 0
 db 0
