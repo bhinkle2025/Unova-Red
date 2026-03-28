@@ -340,7 +340,6 @@ ItemSortList::
 	db POKE_BALL
 	db GREAT_BALL
 	db ULTRA_BALL
-	db THIEF_BALL
 	db SAFARI_BALL
 	db MASTER_BALL
 	; Common Items

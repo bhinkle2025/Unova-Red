@@ -99,4 +99,3 @@ ItemPrices:
 	money 200   ; CLEANSE_TAG
 	money 0     ; Teleporter
 	money 0     ; POKE_VIAL
-	money 2100  ; THIEF_BALL

@@ -116,15 +116,6 @@ ItemUsePtrTable:
 	dw ItemUseCleanseTag ; CLEANSE TAG
 	dw ItemUseTeleporter ; TELEPORTER
 	dw ItemUsePokeVial   ; POKEVIAL
-	dw ItemThiefBall     ; THIEF_BALL
-
-ItemThiefBall:
-	ld a,[wIsInBattle]
-	and a
-	jp z,ItemUseNotTime ; not in battle
-	callba IsPokeVialAllowed
-	jr c, BallAnyway
-	jp ThrowBallAtTrainerMon
 
 ItemUseBall:
 
@@ -137,7 +128,6 @@ ItemUseBall:
 	dec a
 	jp nz,ThrowBallAtTrainerMon
 
-BallAnyway:
 ; If this is for the old man battle, skip checking if the party & box are full.
 	ld a,[wBattleType]
 	dec a
@@ -224,13 +214,6 @@ BallAnyway:
 	cp a,POKE_BALL
 	jr z,.checkForAilments
 
-	cp a,THIEF_BALL
-	jr nz,.rand1NotThiefWild
-	ld a, [wIsInBattle]
-	dec a
-	jr z,.checkForAilments ; If wild battle
-	ld a,[hl]
-.rand1NotThiefWild
 ; If it's a Great/Ultra/Safari Ball and Rand1 is greater than 200, try again.
 	ld a,200
 	cp b
@@ -349,7 +332,7 @@ BallAnyway:
 	jr c,.failedToCapture
 
 .captured
-	jp .skipShakeCalculations
+	jr .skipShakeCalculations
 
 .failedToCapture
 	ld a,[H_QUOTIENT + 3]
@@ -366,27 +349,20 @@ BallAnyway:
 	call Multiply
 
 ; Determine BallFactor2.
-; Used for amount of ball shakes on failed catch
 ; Poké Ball:         BallFactor2 = 255
 ; Great Ball:        BallFactor2 = 200
 ; Ultra/Safari Ball: BallFactor2 = 150
-; Thief Ball:        BallFactor2 = 255 if Wild
 ;                    BallFactor2 = 150 if Trainer
 	ld a,[wcf91]
 	ld b,255
 	cp a,POKE_BALL
 	jr z,.skip4
-	cp a,THIEF_BALL
-	jr nz,.ballFactor2NotThiefWild
-	ld a, [wIsInBattle]
-	dec a
-	jr z,.skip4 ; If wild battle
-	ld a,[wcf91]
-.ballFactor2NotThiefWild
 	ld b,200
 	cp a,GREAT_BALL
 	jr z,.skip4
-	ld b,150  ; If Ultra Ball/Safari Ball/Thief Ball and trainer battle
+	ld b,150 
+	cp a,ULTRA_BALL
+	jr z,.skip4
 
 .skip4
 ; Let Y = (CatchRate * 100) / BallFactor2. Calculate Y.
@@ -554,20 +530,10 @@ BallAnyway:
 	ld [wd11e],a
 	ld a,[wBattleType]
 	dec a ; is this the old man battle?
-	jp z,.oldManCaughtMon ; if so, don't give the player the caught Pokémon
+	jr z,.oldManCaughtMon ; if so, don't give the player the caught Pokémon
 
 	ld hl,ItemUseBallText05
 	call PrintText
-	ld a,[wcf91]
-	cp a,THIEF_BALL
-	jr z,.notUsingThiefBall
-	ld a, [wIsInBattle]
-	dec a
-	jr z,.notUsingThiefBall ; If wild battle
-	ld hl,ItemUseBallText09
-	call PrintText
-	callba SetStolen
-.notUsingThiefBall
 ; Add the caught Pokémon to the Pokédex.
 	predef IndexToPokedex
 	ld a,[wd11e]
@@ -669,11 +635,6 @@ ItemUseBallText07:
 ItemUseBallText08:
 ;"X was transferred to someone's PC"
 	TX_FAR _ItemUseBallText08
-	db "@"
-
-ItemUseBallText09:
-;"The trainer does not want to continue since you stole their Pokemon."
-	TX_FAR _ItemUseBallText09
 	db "@"
 
 ItemUseBallText06:
@@ -2594,15 +2555,7 @@ ThrowBallAtTrainerMon:
 	predef MoveAnimation ; do animation
 	ld hl,ThrowBallAtTrainerMonText1
 	call PrintText
-	ld a,[wcf91]
-	cp a,THIEF_BALL
-	jr z, .usingThiefBall
-.default
 	ld hl,ThrowBallAtTrainerMonText2
-	jr .cont
-.usingThiefBall
-	ld hl,ThrowBallAtTrainerMonText3
-.cont
 	call PrintText
 	jr RemoveUsedItem
 
@@ -2640,10 +2593,6 @@ ThrowBallAtTrainerMonText1:
 
 ThrowBallAtTrainerMonText2:
 	TX_FAR _ThrowBallAtTrainerMonText2
-	db "@"
-
-ThrowBallAtTrainerMonText3:
-	TX_FAR _ThrowBallAtTrainerMonText3
 	db "@"
 
 NoCyclingAllowedHereText:

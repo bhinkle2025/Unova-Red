@@ -58,9 +58,9 @@ OakSpeech:
 	ld a,1
 	ld [wItemQuantity],a   ; give a teleporter (in case we ever get stuck after loading a save) 
 	call AddItemToInventory
-	ld a,THIEF_BALL
+	ld a,RARE_CANDY
 	ld [wcf91],a
-	ld a,3
+	ld a,20
 	ld [wItemQuantity],a
 	call AddItemToInventory
 	ld a,[wDefaultMap]
