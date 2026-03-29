@@ -304,6 +304,7 @@ VermilionCityTextNew:
 	ld hl, OfficerNoBadgeText
 	call PrintText
 	jr .done
+
 .haveBadge
 	ld hl, OfficerHaveBadgeText
 	call PrintText
@@ -311,24 +312,11 @@ VermilionCityTextNew:
 	ld a, [wCurrentMenuItem]
 	and a
 	jr nz, .chooseNo
-	ld a, [wPlayerStarter]
-	cp STARTER2
-	jr nz, .NotStarter2
-	lb bc, SNIVY, 10
+
+	lb bc, VANILLITE, 25  
 	call GivePokemon
 	jr nc, .done
-	jr .ReceivedPoke
-.NotStarter2
-	cp STARTER3
-	jr nz, .NotStarter3
-	lb bc, TEPIG, 10
-	call GivePokemon
-	jr nc, .done
-	jr .ReceivedPoke
-.NotStarter3
-	lb bc, OSHAWOTT, 10
-	call GivePokemon
-	jr nc, .done
+
 .ReceivedPoke
 	ld a, [wAddedToParty]
 	and a
@@ -339,10 +327,12 @@ VermilionCityTextNew:
 	call PrintText
 	SetEvent EVENT_GOT_VERMILION_STARTER
 	jr .done
+
 .chooseNo
 	ld hl, OfficerNoText
 	call PrintText
 	jr .done
+
 .gotStarter
 	ld hl, OfficerHaveText
 	call PrintText

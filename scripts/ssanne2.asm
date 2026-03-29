@@ -100,20 +100,8 @@ SSAnne2Script1:
 	ld a, OPP_SONY2
 	ld [wCurOpponent], a
 
-	; select which team to use during the encounter
-	ld a, [wRivalStarter]
-	cp STARTER2
-	jr nz, .NotSquirtle
-	ld a, $1
-	jr .done
-.NotSquirtle
-	cp STARTER3
-	jr nz, .Charmander
-	ld a, $2
-	jr .done
-.Charmander
+	; rival always uses the Lillipup team
 	ld a, $3
-.done
 	ld [wTrainerNo], a
 
 	call SSAnne2Script_61416

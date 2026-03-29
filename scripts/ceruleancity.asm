@@ -137,20 +137,8 @@ CeruleanCityScript1:
 	ld a, OPP_SONY1
 	ld [wCurOpponent], a
 
-	; select which team to use during the encounter
-	ld a, [wRivalStarter]
-	cp STARTER2
-	jr nz, .NotSquirtle
-	ld a, $7
-	jr .done
-.NotSquirtle
-	cp STARTER3
-	jr nz, .Charmander
-	ld a, $8
-	jr .done
-.Charmander
+	; rival always uses the Lillipup team
 	ld a, $9
-.done
 	ld [wTrainerNo], a
 
 	xor a

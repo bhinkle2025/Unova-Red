@@ -117,7 +117,7 @@ DisplayTitleScreen:
 	call SaveScreenTilesToBuffer2
 	call LoadScreenTilesFromBuffer2
 	call EnableLCD
-	ld a,TEPIG ; which Pokemon to show first on the title screen
+	ld a,EMOLGA ; which Pokemon to show first on the title screen
 
 	ld [wTitleMonSpecies], a
 	call LoadTitleMonSprite

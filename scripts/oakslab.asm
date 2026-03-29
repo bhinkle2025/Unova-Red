@@ -39,6 +39,15 @@ OaksLabScript0:
 	ld a, HS_OAKS_LAB_OAK_2
 	ld [wMissableObjectIndex], a
 	predef ShowObject
+
+	ld a, HS_STARTER_BALL_1
+	ld [wMissableObjectIndex], a
+	predef HideObject
+
+	ld a, HS_STARTER_BALL_3
+	ld [wMissableObjectIndex], a
+	predef HideObject
+
 	ld hl, wd72e
 	res 4, [hl]
 
@@ -191,150 +200,13 @@ OaksLabScript7:
 	ret
 
 OaksLabScript8:
-	ld a, [wPlayerStarter]
-	cp STARTER1
-	jr z, .Charmander
-	cp STARTER2
-	jr z, .Squirtle
-	jr .Bulbasaur
-.Charmander
-	ld de, .MiddleBallMovement1
-	ld a, [wYCoord]
-	cp $4 ; is the player standing below the table?
-	jr z, .asm_1ccf3
-	ld de, .MiddleBallMovement2
-	jr .asm_1ccf3
-
-.MiddleBallMovement1
-	db NPC_MOVEMENT_DOWN
-	db NPC_MOVEMENT_DOWN
-	db NPC_MOVEMENT_RIGHT
-	db NPC_MOVEMENT_RIGHT
-	db NPC_MOVEMENT_RIGHT
-	db NPC_MOVEMENT_UP
-	db $FF
-
-.MiddleBallMovement2
-	db NPC_MOVEMENT_DOWN
-	db NPC_MOVEMENT_RIGHT
-	db NPC_MOVEMENT_RIGHT
-	db NPC_MOVEMENT_RIGHT
-	db $FF
-
-.Squirtle
-	ld de, .RightBallMovement1
-	ld a, [wYCoord]
-	cp $4 ; is the player standing below the table?
-	jr z, .asm_1ccf3
-	ld de, .RightBallMovement2
-	jr .asm_1ccf3
-
-.RightBallMovement1
-	db NPC_MOVEMENT_DOWN
-	db NPC_MOVEMENT_DOWN
-	db NPC_MOVEMENT_RIGHT
-	db NPC_MOVEMENT_RIGHT
-	db NPC_MOVEMENT_RIGHT
-	db NPC_MOVEMENT_RIGHT
-	db NPC_MOVEMENT_UP
-	db $FF
-
-.RightBallMovement2
-	db NPC_MOVEMENT_DOWN
-	db NPC_MOVEMENT_RIGHT
-	db NPC_MOVEMENT_RIGHT
-	db NPC_MOVEMENT_RIGHT
-	db NPC_MOVEMENT_RIGHT
-	db $FF
-
-.Bulbasaur
-	ld de, .LeftBallMovement1
-	ld a, [wXCoord]
-	cp $9 ; is the player standing to the right of the table?
-	jr nz, .asm_1ccf3
-	push hl
-	ld a, $1
-	ld [H_SPRITEINDEX], a
-	ld a, $4
-	ld [H_SPRITEDATAOFFSET], a
-	call GetPointerWithinSpriteStateData1
-	push hl
-	ld [hl], $4c
-	inc hl
-	inc hl
-	ld [hl], $0
-	pop hl
-	inc h
-	ld [hl], $8
-	inc hl
-	ld [hl], $9
-	ld de, .LeftBallMovement2 ; the rival is not currently onscreen, so account for that
-	pop hl
-	jr .asm_1ccf3
-
-.LeftBallMovement1
-	db NPC_MOVEMENT_DOWN
-	db NPC_MOVEMENT_RIGHT ; not yet terminated!
-.LeftBallMovement2
-	db NPC_MOVEMENT_RIGHT
-	db $FF
-
-.asm_1ccf3
-	ld a, $1
-	ld [H_SPRITEINDEX], a
-	call MoveSprite
-
-	ld a, $9
+	ld a, STARTER1
+	ld [wRivalStarter], a
+	ld a, $a
 	ld [wOaksLabCurScript], a
 	ret
 
 OaksLabScript9:
-	ld a, [wd730]
-	bit 0, a
-	ret nz
-	ld a, $fc
-	ld [wJoyIgnore], a
-	ld a, $1
-	ld [H_SPRITEINDEX], a
-	ld a, SPRITE_FACING_UP
-	ld [hSpriteFacingDirection], a
-	call SetSpriteFacingDirectionAndDelay
-	ld a, $d
-	ld [hSpriteIndexOrTextID], a
-	call DisplayTextID
-	ld a, [wRivalStarterBallSpriteIndex]
-	cp $2
-	jr nz, .asm_1cd28
-	ld a, HS_STARTER_BALL_1
-	jr .asm_1cd32
-.asm_1cd28
-	cp $3
-	jr nz, .asm_1cd30
-	ld a, HS_STARTER_BALL_2
-	jr .asm_1cd32
-.asm_1cd30
-	ld a, HS_STARTER_BALL_3
-.asm_1cd32
-	ld [wMissableObjectIndex], a
-	predef HideObject
-	call Delay3
-	ld a, [wRivalStarterTemp]
-	ld [wRivalStarter], a
-	ld [wcf91], a
-	ld [wd11e], a
-	call GetMonName
-	ld a, $1
-	ld [H_SPRITEINDEX], a
-	ld a, SPRITE_FACING_UP
-	ld [hSpriteFacingDirection], a
-	call SetSpriteFacingDirectionAndDelay
-	ld a, $e
-	ld [hSpriteIndexOrTextID], a
-	call DisplayTextID
-	SetEvent EVENT_GOT_STARTER
-	xor a
-	ld [wJoyIgnore], a
-
 	ld a, $a
 	ld [wOaksLabCurScript], a
 	ret
@@ -380,22 +252,10 @@ OaksLabScript11:
 	bit 0, a
 	ret nz
 
-	; define which team rival uses, and fight it
+	; rival always uses the Lillipup team
 	ld a, OPP_SONY1
 	ld [wCurOpponent], a
-	ld a, [wRivalStarter]
-	cp STARTER2
-	jr nz, .NotSquirtle
 	ld a, $1
-	jr .done
-.NotSquirtle
-	cp STARTER3
-	jr nz, .Charmander
-	ld a, $2
-	jr .done
-.Charmander
-	ld a, $3
-.done
 	ld [wTrainerNo], a
 	ld a, $1
 	ld [wSpriteIndex], a
@@ -794,19 +654,15 @@ OaksLabText41:
 
 OaksLabText2:
 	TX_ASM
-	ld a, STARTER2
-	ld [wRivalStarterTemp], a
-	ld a, $3
-	ld [wRivalStarterBallSpriteIndex], a
-	ld a, STARTER1
-	ld b, $2
-	jr OaksLabScript_1d133
+	ld hl, OaksLabText40
+	call PrintText
+	jp TextScriptEnd
 
 OaksLabText3:
 	TX_ASM
-	ld a, STARTER3
+	ld a, STARTER1
 	ld [wRivalStarterTemp], a
-	ld a, $4
+	ld a, $3
 	ld [wRivalStarterBallSpriteIndex], a
 	ld a, STARTER2
 	ld b, $3
@@ -814,12 +670,9 @@ OaksLabText3:
 
 OaksLabText4:
 	TX_ASM
-	ld a, STARTER1
-	ld [wRivalStarterTemp], a
-	ld a, $2
-	ld [wRivalStarterBallSpriteIndex], a
-	ld a, STARTER3
-	ld b, $4
+	ld hl, OaksLabText40
+	call PrintText
+	jp TextScriptEnd
 
 OaksLabScript_1d133:
 	ld [wcf91], a
@@ -927,11 +780,13 @@ OaksLabMonChoiceMenu:
 	ld a, [wcf91]
 	ld [wd11e], a
 	call AddPartyMon
+	ld a, STARTER1
+	ld [wRivalStarter], a
 	ld hl, wd72e
 	set 3, [hl]
-	ld a, $fc
+	xor a
 	ld [wJoyIgnore], a
-	ld a, $8
+	ld a, $a
 	ld [wOaksLabCurScript], a
 OaksLabMonChoiceEnd:
 	jp TextScriptEnd

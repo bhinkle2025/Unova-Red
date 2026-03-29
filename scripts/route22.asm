@@ -142,7 +142,6 @@ Route22Script1:
 StarterMons_50faf:
 ; starter the rival picked, rival trainer number
 	db STARTER2,$04
-	db STARTER3,$05
 	db STARTER1,$06
 
 Route22Script2:
@@ -297,7 +296,6 @@ Route22Script4:
 
 StarterMons_510d9:
 	db STARTER2,$0a
-	db STARTER3,$0b
 	db STARTER1,$0c
 
 Route22Script5:

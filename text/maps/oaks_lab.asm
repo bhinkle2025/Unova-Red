@@ -6,11 +6,10 @@ _OaksLabGaryText1::
 
 _OaksLabText40::
 	text "<RIVAL>: Heh, I"
-	line "don't need to be"
-	cont "greedy like you!"
+	line "already got mine!"
 
-	para "Go ahead and"
-	line "choose, ", $52, "!"
+	para "There's only one"
+	line "left now, ", $52, "!"
 	done
 
 _OaksLabText41::
@@ -27,14 +26,14 @@ _OaksLabText39::
 
 _OaksLabSquirtleText::
 	text "So! You want the"
-	line "fire #MON,"
-	cont "TEPIG?"
+	line "electric #MON,"
+	cont "EMOLGA?"
 	done
 
 _OaksLabBulbasaurText::
 	text "So! You want the"
-	line "water #MON,"
-	cont "OSHAWOTT?"
+	line "electric #MON,"
+	cont "EMOLGA?"
 	done
 
 _OaksLabCharmanderText::
@@ -183,48 +182,45 @@ _OaksLabText_1d340::
 
 _OaksLabRivalWaitingText::
 	text "<RIVAL>: Gramps!"
-	line "I'm fed up with"
-	cont "waiting!"
+	line "Are you done yet?"
 	done
 
 _OaksLabChooseMonText::
-	text "OAK: <RIVAL>?"
-	line "Let me think..."
+	text "OAK: <RIVAL>!"
+	line "Be patient!"
 
-	para "Oh, that's right,"
-	line "I told you to"
-	cont "come! Just wait!"
+	para "You already have"
+	line "your #MON."
 
 	para "Here, <PLAYER>!"
 
-	para "There are 3"
-	line "#MON here!"
+	para "I have just 1"
+	line "#MON left."
 
-	para "Haha!"
+	para "You can have it!"
 
-	para "They are inside"
-	line "the # BALLs."
+	para "It is inside"
+	line "the # BALL."
 
 	para "When I was young,"
 	line "I was a serious"
 	cont "#MON trainer!"
 
 	para "In my old age, I"
-	line "have only 3 left,"
-	cont "but you can have"
-	cont "one! Choose!"
+	line "only have 1 left."
+
+	para "You can have it!"
 	done
 
 _OaksLabRivalInterjectionText::
-	text "<RIVAL>: Hey!"
-	line "Gramps! What"
-	cont "about me?"
+	text "<RIVAL>: Hmph!"
+	line "About time!"
 	done
 
 _OaksLabBePatientText::
-	text "OAK: Be patient!"
-	line "<RIVAL>, you can"
-	cont "have one too!"
+	text "OAK: Now, now,"
+	line "<RIVAL>! Yours is"
+	cont "already with you!"
 	done
 
 _OaksLabLeavingText::

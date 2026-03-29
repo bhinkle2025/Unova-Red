@@ -132,26 +132,10 @@ ReadTrainer:
 ; klinklang
 	ld a,GEAR_GRIND
 	ld [wEnemyMon3Moves],a
-
-; whimsicott
-	ld a,[wRivalStarter]
-	cp STARTER3
-	ld b,GIGA_DRAIN
-	ld a,b
-	ld [wEnemyMon4Moves + 3],a
-	jr z,.StarterCheck
-	cp STARTER1
-	jr z,.StarterCheck
-	ld b,GIGA_DRAIN
-	ld a,b
-	ld [wEnemyMon5Moves + 3],a
 	
 ; starter
 .StarterCheck
 	ld a,[wRivalStarter]
-	cp STARTER3
-	ld b,BLIZZARD
-	jr z,.GiveStarterMove
 	cp STARTER1
 	ld b,SOLARBEAM
 	jr z,.GiveStarterMove

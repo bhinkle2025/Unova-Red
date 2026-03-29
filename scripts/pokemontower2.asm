@@ -145,20 +145,8 @@ PokemonTower2Text1:
 	ld a, OPP_SONY2
 	ld [wCurOpponent], a
 
-	; select which team to use during the encounter
-	ld a, [wRivalStarter]
-	cp STARTER2
-	jr nz, .NotSquirtle
-	ld a, $4
-	jr .done
-.NotSquirtle
-	cp STARTER3
-	jr nz, .Charmander
-	ld a, $5
-	jr .done
-.Charmander
+	; rival always uses the Lillipup team
 	ld a, $6
-.done
 	ld [wTrainerNo], a
 
 	ld a, $1

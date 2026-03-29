@@ -185,19 +185,7 @@ SilphCo7Script3:
 	call SaveEndBattleTextPointers
 	ld a, OPP_SONY2
 	ld [wCurOpponent], a
-	ld a, [wRivalStarter]
-	cp STARTER2
-	jr nz, .asm_51cb6
-	ld a, $7
-	jr .asm_51cc0
-.asm_51cb6
-	cp STARTER3
-	jr nz, .asm_51cbe
-	ld a, $8
-	jr .asm_51cc0
-.asm_51cbe
-	ld a, $9
-.asm_51cc0
+	ld a, $9 ; Lillipup team
 	ld [wTrainerNo], a
 	ld a, $4
 	jp SilphCo7Text_51c10
@@ -318,37 +306,24 @@ SilphCo7TrainerHeader3:
 	db $ff
 
 SilphCo7Text1:
-; lapras guy
+; Klink guy
 	TX_ASM
 	ld a, [wd72e]
-	bit 0, a ; got lapras?
-	jr z, .givelapras
+	bit 0, a ; got gift mon?
+	jr z, .giveklink
 	CheckEvent EVENT_BEAT_SILPH_CO_GIOVANNI
 	jr nz, .savedsilph
 	ld hl, .LaprasGuyText
 	call PrintText
 	jr .done
-.givelapras
+
+.giveklink
 	ld hl, .MeetLaprasGuyText
 	call PrintText
-	ld a, [wPlayerStarter]
-	cp STARTER2
-	jr nz, .NotStarter2
-	lb bc, OSHAWOTT, 15
+	lb bc, KLINK, 32
 	call GivePokemon
 	jr nc, .done
-	jr .ReceivedPoke
-.NotStarter2
-	cp STARTER3
-	jr nz, .NotStarter3
-	lb bc, SNIVY, 15
-	call GivePokemon
-	jr nc, .done
-	jr .ReceivedPoke
-.NotStarter3
-	lb bc, TEPIG, 15
-	call GivePokemon
-	jr nc, .done
+
 .ReceivedPoke
 	ld a, [wSimulatedJoypadStatesEnd]
 	and a
@@ -359,6 +334,7 @@ SilphCo7Text1:
 	ld hl, wd72e
 	set 0, [hl]
 	jr .done
+
 .savedsilph
 	ld hl, .LaprasGuySavedText
 	call PrintText
